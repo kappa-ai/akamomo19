@@ -8,7 +8,6 @@ import { FranchiseStrengths } from "@/components/home/franchise-strengths"
 import { FranchiseProcess } from "@/components/home/franchise-process"
 import { StartupCost } from "@/components/home/startup-cost"
 import { InquiryCTA } from "@/components/home/inquiry-cta"
-import { NewsSection } from "@/components/home/news-section"
 
 export default function HomePage() {
   return (
@@ -23,7 +22,6 @@ export default function HomePage() {
         <FranchiseProcess />
         <StartupCost />
         <InquiryCTA />
-        <NewsSection />
       </main>
       <Footer />
     </div>
