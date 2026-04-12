@@ -95,7 +95,7 @@ export default function WholesalePage() {
                     <Link href="/inquiry">가맹 문의하기</Link>
                   </Button>
                   <Button asChild variant="outline" className="rounded-full border-peach-light hover:bg-peach-lighter">
-                    <a href="https://akamomo19.com" target="_blank" rel="noopener noreferrer">
+                    <a href="https://b2b.akamomopartners.com/" target="_blank" rel="noopener noreferrer">
                       도매몰 둘러보기
                       <ArrowRight className="ml-2 w-4 h-4" />
                     </a>
@@ -108,10 +108,12 @@ export default function WholesalePage() {
                 <div className="bg-white rounded-3xl p-4 border border-border shadow-lg">
                   <div className="aspect-video relative rounded-2xl overflow-hidden">
                     <Image
-                      src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/02_akamomo_b2b_main_reference-8yojLZwIJPfGv7JUGzdHagBz2PLWoA.png"
-                      alt="아카모모 B2B 도매몰"
+                      src="/wholesale-b2b-preview.png"
+                      alt="아카모모 by partners 점주 전용 B2B 도매몰"
                       fill
                       className="object-cover object-top"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      priority
                     />
                   </div>
                   <div className="mt-4 text-center">
