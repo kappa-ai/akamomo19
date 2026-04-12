@@ -4,7 +4,7 @@ const audiences = [
   {
     icon: Briefcase,
     title: "직장인 부업",
-    description: "본업과 병행 가능한 부업형 창업"
+    description: "본업과 병행 가능한 부업형 가맹"
   },
   {
     icon: Home,
@@ -15,16 +15,6 @@ const audiences = [
     icon: Clock,
     title: "정년퇴직 후",
     description: "새로운 수익원을 찾는 분들께"
-  },
-  {
-    icon: Lightbulb,
-    title: "창업 초보자",
-    description: "경험 없이도 가능한 운영 구조"
-  },
-  {
-    icon: Calendar,
-    title: "주 1회 관리",
-    description: "간단한 매장 관리로 운영"
   }
 ]
 

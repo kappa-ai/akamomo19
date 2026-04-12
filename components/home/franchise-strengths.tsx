@@ -3,8 +3,8 @@ import { Wallet, TrendingUp, ShoppingBag, Headphones, Megaphone } from "lucide-r
 const strengths = [
   {
     icon: Wallet,
-    title: "부담 없는 창업 비용",
-    description: "합리적인 초기 투자 비용으로 부담 없이 창업을 시작할 수 있습니다",
+    title: "부담 없는 가맹 비용",
+    description: "합리적인 초기 투자 비용으로 부담 없이 가맹을 시작할 수 있습니다",
     highlight: "4,000만원"
   },
   {
@@ -14,22 +14,16 @@ const strengths = [
     highlight: "50%+"
   },
   {
-    icon: ShoppingBag,
-    title: "점주 전용 도매 사이트",
-    description: "본사에서 운영하는 전용 도매몰을 통해 경쟁력 있는 가격으로 상품을 공급받습니다",
-    highlight: "전용몰"
-  },
-  {
     icon: Headphones,
     title: "지속적인 운영 지원과 홍보",
-    description: "본사의 체계적인 운영 지원과 지속적인 마케팅 지원을 받을 수 있습니다",
+    description: "본사의 체계적인 운영 지원과 다양한 마케팅을 통해 점주님들의 홍보에 대한 부담을 줄여줍니다.",
     highlight: "본사 지원"
   },
   {
-    icon: Megaphone,
-    title: "SNS/블로그/유튜브 마케팅",
-    description: "다양한 온라인 채널을 통한 브랜드 홍보와 마케팅 지원을 제공합니다",
-    highlight: "마케팅"
+    icon: ShoppingBag,
+    title: "점주 전용 도매 사이트",
+    description: "여러 도매처 상품들을 한 곳에 모아, 매출에 도움이 되는 상품만 선별하여 보다 간편하게 발주할 수 있습니다.",
+    highlight: "전용몰"
   }
 ]
 
@@ -39,10 +33,10 @@ export function FranchiseStrengths() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            가맹의 <span className="text-primary">강점</span>
+            아카모모의 <span className="text-primary">강점</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            아카모모만의 체계적인 지원 시스템으로 성공적인 창업을 도와드립니다
+            아카모모만의 체계적인 지원 시스템으로 성공적인 가맹을 도와드립니다
           </p>
         </div>
 

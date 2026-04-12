@@ -41,12 +41,12 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/startup" className="text-muted-foreground hover:text-primary transition-colors">
-                  창업안내
+                  가맹안내
                 </Link>
               </li>
               <li>
                 <Link href="/inquiry" className="text-muted-foreground hover:text-primary transition-colors">
-                  창업문의
+                  가맹문의
                 </Link>
               </li>
               <li>
@@ -59,7 +59,7 @@ export function Footer() {
 
           {/* Contact */}
           <div>
-            <h4 className="font-semibold text-foreground mb-4">창업 문의</h4>
+            <h4 className="font-semibold text-foreground mb-4">가맹 문의</h4>
             <div className="space-y-3">
               <div className="bg-white rounded-2xl p-4 border border-border">
                 <p className="text-xs text-muted-foreground mb-1">전화 상담</p>

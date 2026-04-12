@@ -12,7 +12,7 @@ export function InquiryCTA() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4">
-            창업에 대해 궁금하신가요?
+            가맹에 대해 궁금하신가요?
           </h2>
           <p className="text-white/90 max-w-2xl mx-auto mb-10 text-lg">
             아카모모 전문 상담원이 친절하게 안내해 드립니다.
@@ -28,7 +28,7 @@ export function InquiryCTA() {
             >
               <Link href="/inquiry">
                 <MessageCircle className="mr-2 h-5 w-5" />
-                창업 상담 신청하기
+                가맹 상담 신청하기
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>

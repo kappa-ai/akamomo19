@@ -239,7 +239,7 @@ export default function StoresPage() {
               <p className="text-white/80 max-w-2xl mx-auto mb-8">
                 아직 아카모모가 없는 지역에서 첫 번째 점주가 되어보세요.
                 <br />
-                본사의 체계적인 지원으로 성공적인 창업을 도와드립니다.
+                본사의 체계적인 지원으로 성공적인 가맹을 도와드립니다.
               </p>
               <Button
                 asChild
@@ -247,7 +247,7 @@ export default function StoresPage() {
                 className="rounded-full bg-white text-primary hover:bg-cream px-8 py-6 text-lg"
               >
                 <Link href="/inquiry">
-                  창업 상담 신청하기
+                  가맹 상담 신청하기
                   <ChevronRight className="ml-2 w-5 h-5" />
                 </Link>
               </Button>

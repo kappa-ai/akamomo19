@@ -29,13 +29,13 @@ const steps = [
     icon: Package,
     step: "05",
     title: "초도물량",
-    description: "매장 오픈을 위한 상품을 입고합니다"
+    description: "매장 교육 및 오픈을 위한 상품을 입고합니다"
   },
   {
     icon: PartyPopper,
     step: "06",
     title: "그랜드 오픈",
-    description: "매장을 오픈하고 운영을 시작합니다"
+    description: "매장 오픈 후 지속적인 사후 관리를 지원합니다"
   }
 ]
 
@@ -48,7 +48,7 @@ export function FranchiseProcess() {
             가맹 <span className="text-primary">절차</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            체계적인 프로세스로 창업 초보자도 쉽게 시작할 수 있습니다
+            체계적인 프로세스로 가맹 초보자도 쉽게 시작할 수 있습니다
           </p>
         </div>
 

@@ -15,7 +15,7 @@ export function HeroSection() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 mb-6 border border-peach-light shadow-sm">
             <Sparkles className="w-4 h-4 text-coral" />
-            <span className="text-sm font-medium text-foreground">새로운 형태의 성인용품 창업</span>
+            <span className="text-sm font-medium text-foreground">새로운 형태의 성인용품 가맹</span>
           </div>
 
           {/* Main Headline */}
@@ -30,7 +30,7 @@ export function HeroSection() {
           <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-10 max-w-2xl mx-auto text-pretty">
             기존의 딱딱하고 부담스러운 성인용품점은 이제 그만.
             <br className="hidden md:block" />
-            밝고 친근한 라이프스타일 매장으로 새로운 창업의 기회를 만나보세요.
+            밝고 친근한 라이프스타일 매장으로 새로운 가맹의 기회를 만나보세요.
           </p>
 
           {/* CTA Buttons */}
@@ -41,7 +41,7 @@ export function HeroSection() {
               className="rounded-full bg-primary hover:bg-coral text-white px-8 py-6 text-lg shadow-lg shadow-primary/20 transition-all hover:shadow-xl hover:shadow-coral/30"
             >
               <Link href="/inquiry">
-                창업 상담 신청하기
+                가맹 상담 신청하기
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
@@ -53,24 +53,6 @@ export function HeroSection() {
             >
               <Link href="/brand">브랜드 소개 보기</Link>
             </Button>
-          </div>
-
-          {/* Trust Indicators */}
-          <div className="mt-16 flex flex-wrap items-center justify-center gap-8">
-            <div className="text-center">
-              <p className="text-3xl font-bold text-primary">50%+</p>
-              <p className="text-sm text-muted-foreground">높은 수익률</p>
-            </div>
-            <div className="w-px h-12 bg-border hidden sm:block" />
-            <div className="text-center">
-              <p className="text-3xl font-bold text-primary">4,000만원</p>
-              <p className="text-sm text-muted-foreground">총 창업비용</p>
-            </div>
-            <div className="w-px h-12 bg-border hidden sm:block" />
-            <div className="text-center">
-              <p className="text-3xl font-bold text-primary">주 1회</p>
-              <p className="text-sm text-muted-foreground">매장 관리</p>
-            </div>
           </div>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import type { ReactNode } from "react"
 import { Check, Info } from "lucide-react"
 
 const costItems = [
@@ -23,11 +24,17 @@ const costItems = [
   }
 ]
 
-const benefits = [
+const benefits: ReactNode[] = [
   "에어컨 및 냉난방기 설치 별도",
-  "매월 로열티 면제",
-  "매월 관리비 면제",
-  "매월 홍보비 면제"
+  <span key="royalty" className="font-bold text-foreground">
+    매월 로열티 면제
+  </span>,
+  <>
+    매월 <span className="font-bold text-foreground">관리비</span> 면제
+  </>,
+  <>
+    매월 <span className="font-bold text-foreground">홍보비 면제</span>
+  </>,
 ]
 
 export function StartupCost() {
@@ -36,10 +43,10 @@ export function StartupCost() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4">
-            창업 <span className="text-primary">비용</span>
+            가맹 <span className="text-primary">비용</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            합리적이고 투명한 창업 비용으로 부담 없이 시작하세요
+            합리적이고 투명한 가맹 비용으로 부담 없이 시작하세요
           </p>
         </div>
 

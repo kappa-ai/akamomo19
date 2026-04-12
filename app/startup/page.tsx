@@ -24,23 +24,23 @@ export default function StartupPage() {
             <div className="text-center max-w-3xl mx-auto">
               <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 mb-6 border border-peach-light">
                 <Rocket className="w-4 h-4 text-primary" />
-                <span className="text-sm font-medium text-foreground">창업 안내</span>
+                <span className="text-sm font-medium text-foreground">가맹 안내</span>
               </div>
               
               <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
                 <span className="text-primary">아카모모</span>와 함께<br />
-                성공적인 창업을 시작하세요
+                성공적인 가맹을 시작하세요
               </h1>
               
               <p className="text-lg text-muted-foreground leading-relaxed mb-8">
                 체계적인 지원 시스템과 검증된 비즈니스 모델로
                 <br />
-                창업 초보자도 안심하고 시작할 수 있습니다.
+                가맹 초보자도 안심하고 시작할 수 있습니다.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Button asChild className="rounded-full bg-primary hover:bg-coral text-white px-8">
-                  <Link href="/inquiry">창업 상담 신청하기</Link>
+                  <Link href="/inquiry">가맹 상담 신청하기</Link>
                 </Button>
                 <Button asChild variant="outline" className="rounded-full border-peach-light hover:bg-peach-lighter">
                   <a href="tel:1588-0000">전화 상담: 1588-0000</a>
@@ -118,7 +118,7 @@ export default function StartupPage() {
                     <div className="w-6 h-6 bg-primary/20 rounded-full flex items-center justify-center shrink-0 mt-0.5">
                       <Check className="w-4 h-4 text-primary" />
                     </div>
-                    <span className="text-muted-foreground">창업 경험 없이도 쉽게 운영</span>
+                    <span className="text-muted-foreground">가맹 경험 없이도 쉽게 운영</span>
                   </li>
                 </ul>
               </div>
@@ -167,7 +167,7 @@ export default function StartupPage() {
                 본사 <span className="text-primary">지원 시스템</span>
               </h2>
               <p className="text-muted-foreground max-w-2xl mx-auto">
-                창업부터 운영까지 아카모모가 함께합니다
+                가맹부터 운영까지 아카모모가 함께합니다
               </p>
             </div>
 
@@ -178,7 +178,7 @@ export default function StartupPage() {
                 </div>
                 <h3 className="text-lg font-semibold text-foreground mb-3">지속적인 운영 지원</h3>
                 <p className="text-sm text-muted-foreground mb-4">
-                  창업 후에도 본사의 체계적인 운영 지원으로 안정적인 매장 운영이 가능합니다.
+                  가맹 후에도 본사의 체계적인 운영 지원으로 안정적인 매장 운영이 가능합니다.
                 </p>
                 <ul className="text-sm text-muted-foreground space-y-2">
                   <li>• 정기 점검 및 컨설팅</li>

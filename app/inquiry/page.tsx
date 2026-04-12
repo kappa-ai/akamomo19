@@ -11,16 +11,16 @@ import { useState } from "react"
 
 const faqs = [
   {
-    question: "창업 경험이 없어도 가능한가요?",
-    answer: "네, 가능합니다! 아카모모는 창업 초보자도 쉽게 운영할 수 있는 시스템을 갖추고 있습니다. 본사에서 체계적인 교육과 지속적인 운영 지원을 제공하므로 경험이 없어도 안심하고 시작하실 수 있습니다."
+    question: "가맹 경험이 없어도 가능한가요?",
+    answer: "네, 가능합니다! 아카모모는 가맹 초보자도 쉽게 운영할 수 있는 시스템을 갖추고 있습니다. 본사에서 체계적인 교육과 지속적인 운영 지원을 제공하므로 경험이 없어도 안심하고 시작하실 수 있습니다."
   },
   {
     question: "부업으로 운영해도 괜찮을까요?",
-    answer: "아카모모는 부업형 창업에 최적화되어 있습니다. 주 1회 정도의 매장 관리로 운영이 가능하며, 무인 운영 시스템을 통해 본업과 병행하실 수 있습니다."
+    answer: "아카모모는 부업형 가맹에 최적화되어 있습니다. 주 1회 정도의 매장 관리로 운영이 가능하며, 무인 운영 시스템을 통해 본업과 병행하실 수 있습니다."
   },
   {
     question: "로열티나 관리비가 있나요?",
-    answer: "아카모모는 매월 로열티, 관리비, 홍보비가 모두 면제입니다. 초기 창업 비용 외에 별도의 월 비용이 발생하지 않아 부담 없이 운영하실 수 있습니다."
+    answer: "아카모모는 매월 로열티, 관리비, 홍보비가 모두 면제입니다. 초기 가맹 비용 외에 별도의 월 비용이 발생하지 않아 부담 없이 운영하실 수 있습니다."
   },
   {
     question: "상품은 어떻게 공급받나요?",
@@ -61,11 +61,11 @@ export default function InquiryPage() {
             <div className="text-center max-w-3xl mx-auto">
               <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 mb-6 border border-peach-light">
                 <MessageCircle className="w-4 h-4 text-primary" />
-                <span className="text-sm font-medium text-foreground">창업 문의</span>
+                <span className="text-sm font-medium text-foreground">가맹 문의</span>
               </div>
               
               <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-                <span className="text-primary">창업</span>에 대해<br />
+                <span className="text-primary">가맹</span>에 대해<br />
                 궁금하신가요?
               </h1>
               
@@ -165,7 +165,7 @@ export default function InquiryPage() {
                       </Select>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-sm font-medium text-foreground">창업 예정 시기</label>
+                      <label className="text-sm font-medium text-foreground">가맹 예정 시기</label>
                       <Select>
                         <SelectTrigger className="rounded-xl border-border">
                           <SelectValue placeholder="시기를 선택해 주세요" />

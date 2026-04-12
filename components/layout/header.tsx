@@ -10,8 +10,8 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 const navigation = [
   { name: "HOME", href: "/" },
   { name: "브랜드소개", href: "/brand" },
-  { name: "창업안내", href: "/startup" },
-  { name: "창업문의", href: "/inquiry" },
+  { name: "가맹안내", href: "/startup" },
+  { name: "가맹문의", href: "/inquiry" },
   { name: "매장안내", href: "/stores" },
   { name: "전용도매몰", href: "/wholesale" },
 ]
@@ -51,7 +51,7 @@ export function Header() {
           {/* CTA Button - Desktop */}
           <div className="hidden md:flex items-center gap-4">
             <Button asChild className="rounded-full bg-primary hover:bg-coral text-white px-6">
-              <Link href="/inquiry">창업 상담 신청</Link>
+              <Link href="/inquiry">가맹 상담 신청</Link>
             </Button>
           </div>
 
@@ -88,7 +88,7 @@ export function Header() {
                 </nav>
                 <Button asChild className="mt-4 rounded-full bg-primary hover:bg-coral text-white">
                   <Link href="/inquiry" onClick={() => setIsOpen(false)}>
-                    창업 상담 신청하기
+                    가맹 상담 신청하기
                   </Link>
                 </Button>
               </div>
