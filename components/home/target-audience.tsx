@@ -1,4 +1,4 @@
-import { Briefcase, Home, Clock, Lightbulb, Calendar } from "lucide-react"
+import { Briefcase, Home, Clock } from "lucide-react"
 
 const audiences = [
   {
@@ -18,6 +18,22 @@ const audiences = [
   }
 ]
 
+function audienceGridClass(count: number) {
+  if (count <= 1) {
+    return "grid-cols-1 max-w-sm mx-auto"
+  }
+  if (count === 2) {
+    return "grid-cols-1 sm:grid-cols-2 max-w-2xl mx-auto"
+  }
+  if (count === 3) {
+    return "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto"
+  }
+  if (count === 4) {
+    return "grid-cols-2 lg:grid-cols-4 max-w-6xl mx-auto"
+  }
+  return "grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
+}
+
 export function TargetAudience() {
   return (
     <section className="py-20 bg-peach-lighter/50">
@@ -31,7 +47,9 @@ export function TargetAudience() {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
+        <div
+          className={`grid w-full gap-4 md:gap-6 ${audienceGridClass(audiences.length)}`}
+        >
           {audiences.map((item, index) => (
             <div
               key={index}
