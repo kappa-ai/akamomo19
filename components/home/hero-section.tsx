@@ -1,16 +1,20 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Sparkles } from "lucide-react"
+import { HeroStoreBackdrop } from "@/components/home/hero-store-backdrop"
+import { siteImages } from "@/lib/site-images"
 
+/** 배너 사진 경로: `lib/site-images.ts` 의 `homeBanner` */
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-peach-lighter via-cream to-background">
-      {/* Decorative Elements */}
-      <div className="absolute top-20 left-10 w-32 h-32 bg-peach-light/30 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 right-10 w-40 h-40 bg-blush/20 rounded-full blur-3xl" />
-      <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-lavender/30 rounded-full blur-2xl" />
+    <section
+      role="banner"
+      aria-label="아카모모 메인 소개"
+      className="relative min-h-[min(85vh,52rem)] md:min-h-[min(88vh,56rem)] overflow-hidden bg-background"
+    >
+      <HeroStoreBackdrop src={siteImages.homeBanner} priority />
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 md:py-32">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 md:py-32">
         <div className="text-center max-w-4xl mx-auto">
           {/* Badge */}
           <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 mb-6 border border-peach-light shadow-sm">
@@ -58,7 +62,7 @@ export function HeroSection() {
       </div>
 
       {/* Wave Decoration */}
-      <div className="absolute bottom-0 left-0 right-0">
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-20">
         <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
           <path
             d="M0 50C240 80 480 90 720 80C960 70 1200 50 1440 60V100H0V50Z"

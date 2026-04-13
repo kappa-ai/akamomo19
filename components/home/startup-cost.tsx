@@ -29,12 +29,12 @@ const benefits: ReactNode[] = [
   <span key="royalty" className="font-bold text-foreground">
     매월 로열티 면제
   </span>,
-  <>
-    매월 <span className="font-bold text-foreground">관리비</span> 면제
-  </>,
-  <>
-    매월 <span className="font-bold text-foreground">홍보비 면제</span>
-  </>,
+  <span key="mgmt" className="font-bold text-foreground">
+    매월 관리비 면제
+  </span>,
+  <span key="pr" className="font-bold text-foreground">
+    매월 홍보비 면제
+  </span>,
 ]
 
 export function StartupCost() {
