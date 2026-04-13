@@ -1,5 +1,6 @@
 import type { ReactNode } from "react"
 import { Check, Info } from "lucide-react"
+import { RevealSection } from "@/components/motion/reveal"
 
 const costItems = [
   {
@@ -39,7 +40,7 @@ const benefits: ReactNode[] = [
 
 export function StartupCost() {
   return (
-    <section className="py-20 bg-peach-lighter/30">
+    <RevealSection className="py-20 bg-peach-lighter/30">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4">
@@ -112,6 +113,6 @@ export function StartupCost() {
           </div>
         </div>
       </div>
-    </section>
+    </RevealSection>
   )
 }

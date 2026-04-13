@@ -1,8 +1,11 @@
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
+import { StorePhoto, StoreGalleryBand } from "@/components/store/store-media"
+import { STORE_PHOTOS_GALLERY_ORDER, storePhotoSlots } from "@/lib/store-photos"
 import { MapPin, Clock, Phone, Navigation, ChevronRight, TrendingUp } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { RevealSection } from "@/components/motion/reveal"
 
 const stores = [
   {
@@ -62,23 +65,22 @@ export default function StoresPage() {
     <div className="min-h-screen bg-background">
       <Header />
       <main>
-        {/* Hero Section */}
-        <section className="relative py-20 bg-gradient-to-b from-peach-lighter to-background overflow-hidden">
+        <RevealSection mode="enter" className="relative py-20 bg-gradient-to-b from-peach-lighter to-background overflow-hidden">
           <div className="absolute top-10 left-10 w-40 h-40 bg-blush/20 rounded-full blur-3xl" />
           <div className="absolute bottom-10 right-10 w-32 h-32 bg-lavender/30 rounded-full blur-2xl" />
-          
+
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="text-center max-w-3xl mx-auto">
               <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 mb-6 border border-peach-light">
                 <MapPin className="w-4 h-4 text-primary" />
                 <span className="text-sm font-medium text-foreground">매장 안내</span>
               </div>
-              
+
               <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
                 <span className="text-primary">아카모모</span> 매장을<br />
                 만나보세요
               </h1>
-              
+
               <p className="text-lg text-muted-foreground leading-relaxed">
                 전국 각지에서 아카모모의 특별한 공간을 경험해 보세요.
                 <br />
@@ -86,34 +88,32 @@ export default function StoresPage() {
               </p>
             </div>
           </div>
-        </section>
+        </RevealSection>
 
-        {/* Store Stats */}
-        <section className="py-12 bg-background">
+        <RevealSection className="py-12 bg-background">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="bg-white rounded-3xl p-6 border border-border shadow-sm text-center">
+              <div className="bg-white rounded-3xl p-6 border border-border shadow-sm text-center h-full">
                 <div className="text-3xl md:text-4xl font-bold text-primary mb-2">50+</div>
                 <p className="text-sm text-muted-foreground">전국 매장</p>
               </div>
-              <div className="bg-white rounded-3xl p-6 border border-border shadow-sm text-center">
+              <div className="bg-white rounded-3xl p-6 border border-border shadow-sm text-center h-full">
                 <div className="text-3xl md:text-4xl font-bold text-primary mb-2">17개</div>
                 <p className="text-sm text-muted-foreground">시도 진출</p>
               </div>
-              <div className="bg-white rounded-3xl p-6 border border-border shadow-sm text-center">
+              <div className="bg-white rounded-3xl p-6 border border-border shadow-sm text-center h-full">
                 <div className="text-3xl md:text-4xl font-bold text-primary mb-2">24시간</div>
                 <p className="text-sm text-muted-foreground">운영</p>
               </div>
-              <div className="bg-white rounded-3xl p-6 border border-border shadow-sm text-center">
+              <div className="bg-white rounded-3xl p-6 border border-border shadow-sm text-center h-full">
                 <div className="text-3xl md:text-4xl font-bold text-primary mb-2">확장중</div>
                 <p className="text-sm text-muted-foreground">브랜드 성장</p>
               </div>
             </div>
           </div>
-        </section>
+        </RevealSection>
 
-        {/* Operating Stores */}
-        <section className="py-20 bg-peach-lighter/30">
+        <RevealSection className="py-20 bg-peach-lighter/30">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4">
@@ -126,10 +126,13 @@ export default function StoresPage() {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {stores.map((store, index) => (
-                <div
-                  key={index}
-                  className="bg-white rounded-3xl p-6 border border-border shadow-sm hover:shadow-md transition-all"
-                >
+                <div key={index} className="bg-white rounded-3xl p-6 border border-border shadow-sm hover:shadow-md transition-all h-full">
+                  <StorePhoto
+                    src={storePhotoSlots.storesOperatingCard[index]}
+                    aspect="video"
+                    className="mb-4"
+                    sizes="(max-width: 1024px) 100vw, 33vw"
+                  />
                   <div className="flex items-center justify-between mb-4">
                     <h3 className="text-lg font-semibold text-foreground">{store.name}</h3>
                     <span className="bg-green-100 text-green-700 text-xs font-medium px-3 py-1 rounded-full">
@@ -162,10 +165,9 @@ export default function StoresPage() {
               ))}
             </div>
           </div>
-        </section>
+        </RevealSection>
 
-        {/* Upcoming Stores */}
-        <section className="py-20 bg-background">
+        <RevealSection className="py-20 bg-background">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4">
@@ -178,10 +180,13 @@ export default function StoresPage() {
 
             <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
               {upcomingStores.map((store, index) => (
-                <div
-                  key={index}
-                  className="bg-gradient-to-br from-peach-lighter to-cream rounded-3xl p-6 border border-border"
-                >
+                <div key={index} className="bg-gradient-to-br from-peach-lighter to-cream rounded-3xl p-6 border border-border h-full">
+                  <StorePhoto
+                    src={storePhotoSlots.storesUpcomingCard[index]}
+                    aspect="video"
+                    className="mb-4 opacity-95"
+                    sizes="(max-width: 1024px) 100vw, 33vw"
+                  />
                   <div className="flex items-center justify-between mb-4">
                     <span className="bg-primary/10 text-primary text-xs font-medium px-3 py-1 rounded-full">
                       오픈 예정
@@ -194,10 +199,9 @@ export default function StoresPage() {
               ))}
             </div>
           </div>
-        </section>
+        </RevealSection>
 
-        {/* Regional Expansion */}
-        <section className="py-20 bg-peach-lighter/30">
+        <RevealSection className="py-20 bg-peach-lighter/30">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4">
@@ -210,10 +214,7 @@ export default function StoresPage() {
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {regions.map((region, index) => (
-                <div
-                  key={index}
-                  className="bg-white rounded-2xl p-5 border border-border text-center hover:shadow-md transition-all"
-                >
+                <div key={index} className="bg-white rounded-2xl p-5 border border-border text-center hover:shadow-md transition-all h-full">
                   <h3 className="font-semibold text-foreground mb-2">{region.name}</h3>
                   <p className="text-2xl font-bold text-primary">{region.count}개</p>
                   {region.available && (
@@ -225,10 +226,17 @@ export default function StoresPage() {
               ))}
             </div>
           </div>
-        </section>
+        </RevealSection>
 
-        {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-br from-primary via-coral to-blush">
+        <StoreGalleryBand
+          title="매장 갤러리"
+          description="실제 공간 분위기를 한눈에 살펴보세요."
+          images={STORE_PHOTOS_GALLERY_ORDER}
+          columns={4}
+          className="bg-background"
+        />
+
+        <RevealSection className="py-20 bg-gradient-to-br from-primary via-coral to-blush">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center text-white">
               <TrendingUp className="w-12 h-12 mx-auto mb-6 opacity-80" />
@@ -253,7 +261,7 @@ export default function StoresPage() {
               </Button>
             </div>
           </div>
-        </section>
+        </RevealSection>
       </main>
       <Footer />
     </div>

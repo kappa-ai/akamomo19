@@ -1,4 +1,5 @@
 import { Briefcase, Home, Clock } from "lucide-react"
+import { RevealSection } from "@/components/motion/reveal"
 
 const audiences = [
   {
@@ -36,7 +37,7 @@ function audienceGridClass(count: number) {
 
 export function TargetAudience() {
   return (
-    <section className="py-20 bg-peach-lighter/50">
+    <RevealSection className="py-20 bg-peach-lighter/50">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4">
@@ -64,6 +65,6 @@ export function TargetAudience() {
           ))}
         </div>
       </div>
-    </section>
+    </RevealSection>
   )
 }

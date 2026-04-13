@@ -1,8 +1,9 @@
 import { Headphones, ShoppingBag, Megaphone } from "lucide-react"
+import { RevealSection } from "@/components/motion/reveal"
 
 export function HeadquartersSupport() {
   return (
-    <section className="py-20 bg-peach-lighter/30">
+    <RevealSection className="py-20 bg-peach-lighter/30">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4">
@@ -60,6 +61,6 @@ export function HeadquartersSupport() {
           </div>
         </div>
       </div>
-    </section>
+    </RevealSection>
   )
 }

@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Phone, MessageCircle, Mail, Clock, ChevronDown, ChevronUp, HelpCircle } from "lucide-react"
 import { useState } from "react"
+import { RevealSection } from "@/components/motion/reveal"
 
 const faqs = [
   {
@@ -52,34 +53,32 @@ export default function InquiryPage() {
     <div className="min-h-screen bg-background">
       <Header />
       <main>
-        {/* Hero Section */}
-        <section className="relative py-20 bg-gradient-to-b from-peach-lighter to-background overflow-hidden">
+        <RevealSection mode="enter" className="relative py-16 md:py-20 bg-gradient-to-b from-peach-lighter to-background overflow-hidden">
           <div className="absolute top-10 right-10 w-40 h-40 bg-blush/20 rounded-full blur-3xl" />
           <div className="absolute bottom-10 left-10 w-32 h-32 bg-lavender/30 rounded-full blur-2xl" />
-          
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="text-center max-w-3xl mx-auto">
-              <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 mb-6 border border-peach-light">
-                <MessageCircle className="w-4 h-4 text-primary" />
+
+          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-3xl text-center">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-peach-light bg-white/80 px-4 py-2 backdrop-blur-sm">
+                <MessageCircle className="h-4 w-4 text-primary" />
                 <span className="text-sm font-medium text-foreground">가맹 문의</span>
               </div>
-              
-              <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
+
+              <h1 className="mb-6 text-balance text-3xl font-bold text-foreground md:text-5xl">
                 <span className="text-primary">가맹</span>에 대해<br />
                 궁금하신가요?
               </h1>
-              
-              <p className="text-lg text-muted-foreground leading-relaxed">
+
+              <p className="text-pretty text-lg leading-relaxed text-muted-foreground">
                 아카모모 전문 상담원이 친절하게 안내해 드립니다.
                 <br />
                 부담 없이 문의해 주세요.
               </p>
             </div>
           </div>
-        </section>
+        </RevealSection>
 
-        {/* Contact Options */}
-        <section className="py-12 bg-background">
+        <RevealSection className="py-12 bg-background">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid md:grid-cols-3 gap-4">
               <a
@@ -119,10 +118,9 @@ export default function InquiryPage() {
               </div>
             </div>
           </div>
-        </section>
+        </RevealSection>
 
-        {/* Inquiry Form */}
-        <section className="py-20 bg-peach-lighter/30">
+        <RevealSection className="py-20 bg-peach-lighter/30">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-12">
               {/* Form */}
@@ -248,7 +246,7 @@ export default function InquiryPage() {
               </div>
             </div>
           </div>
-        </section>
+        </RevealSection>
       </main>
       <Footer />
     </div>

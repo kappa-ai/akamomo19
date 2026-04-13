@@ -1,9 +1,12 @@
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
-import { ShoppingBag, CheckCircle, Package, TrendingUp, Shield, Truck, Search, Star, ArrowRight } from "lucide-react"
+import { ShoppingBag, CheckCircle, Package, TrendingUp, Shield, Truck, Star, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
+import { StorePhoto } from "@/components/store/store-media"
+import { storePhotoSlots } from "@/lib/store-photos"
+import { RevealSection } from "@/components/motion/reveal"
 
 const features = [
   {
@@ -66,11 +69,10 @@ export default function WholesalePage() {
     <div className="min-h-screen bg-background">
       <Header />
       <main>
-        {/* Hero Section */}
-        <section className="relative py-20 bg-gradient-to-b from-peach-lighter to-background overflow-hidden">
+        <RevealSection mode="enter" className="relative py-20 bg-gradient-to-b from-peach-lighter to-background overflow-hidden">
           <div className="absolute top-10 right-10 w-40 h-40 bg-blush/20 rounded-full blur-3xl" />
           <div className="absolute bottom-10 left-10 w-32 h-32 bg-lavender/30 rounded-full blur-2xl" />
-          
+
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>
@@ -78,12 +80,12 @@ export default function WholesalePage() {
                   <ShoppingBag className="w-4 h-4 text-primary" />
                   <span className="text-sm font-medium text-foreground">전용 도매몰</span>
                 </div>
-                
+
                 <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
                   점주 전용<br />
                   <span className="text-primary">도매몰</span>을 소개합니다
                 </h1>
-                
+
                 <p className="text-lg text-muted-foreground leading-relaxed mb-8">
                   아카모모 가맹점주만을 위한 특별한 도매몰에서
                   <br />
@@ -103,7 +105,6 @@ export default function WholesalePage() {
                 </div>
               </div>
 
-              {/* B2B Mall Preview */}
               <div className="relative">
                 <div className="bg-white rounded-3xl p-4 border border-border shadow-lg">
                   <div className="aspect-video relative rounded-2xl overflow-hidden">
@@ -120,19 +121,24 @@ export default function WholesalePage() {
                     <p className="text-sm text-muted-foreground">아카모모 점주 전용 도매몰 미리보기</p>
                   </div>
                 </div>
-                {/* Decorative */}
                 <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-peach-light/30 rounded-full blur-2xl" />
               </div>
             </div>
           </div>
-        </section>
+        </RevealSection>
 
-        {/* Benefits Stats */}
-        <section className="py-16 bg-background">
+        <RevealSection className="py-16 bg-background">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mx-auto mb-12">
+              <StorePhoto
+                src={storePhotoSlots.wholesaleAccent}
+                aspect="video"
+                sizes="(max-width: 768px) 100vw, 48rem"
+              />
+            </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {benefits.map((benefit, index) => (
-                <div key={index} className="bg-white rounded-3xl p-6 border border-border shadow-sm text-center">
+                <div key={index} className="bg-white rounded-3xl p-6 border border-border shadow-sm text-center h-full">
                   <div className="text-3xl md:text-4xl font-bold text-primary mb-2">{benefit.value}</div>
                   <p className="font-medium text-foreground mb-1">{benefit.title}</p>
                   <p className="text-xs text-muted-foreground">{benefit.description}</p>
@@ -140,10 +146,9 @@ export default function WholesalePage() {
               ))}
             </div>
           </div>
-        </section>
+        </RevealSection>
 
-        {/* Features */}
-        <section className="py-20 bg-peach-lighter/30">
+        <RevealSection className="py-20 bg-peach-lighter/30">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4">
@@ -156,10 +161,7 @@ export default function WholesalePage() {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {features.map((feature, index) => (
-                <div
-                  key={index}
-                  className="bg-white rounded-3xl p-8 border border-border shadow-sm hover:shadow-md transition-all group"
-                >
+                <div key={index} className="bg-white rounded-3xl p-8 border border-border shadow-sm hover:shadow-md transition-all group h-full">
                   <div className="w-14 h-14 bg-peach-lighter rounded-2xl flex items-center justify-center mb-6 group-hover:bg-primary transition-colors">
                     <feature.icon className="w-7 h-7 text-primary group-hover:text-white transition-colors" />
                   </div>
@@ -169,10 +171,9 @@ export default function WholesalePage() {
               ))}
             </div>
           </div>
-        </section>
+        </RevealSection>
 
-        {/* How It Works */}
-        <section className="py-20 bg-background">
+        <RevealSection className="py-20 bg-background">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4">
@@ -193,7 +194,6 @@ export default function WholesalePage() {
                   가맹 계약 후 제공되는 점주 전용 계정으로 로그인합니다
                 </p>
               </div>
-
               <div className="text-center">
                 <div className="w-20 h-20 bg-gradient-to-br from-primary to-coral rounded-full flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold">
                   2
@@ -203,7 +203,6 @@ export default function WholesalePage() {
                   필요한 상품을 검색하고 장바구니에 담아 주문합니다
                 </p>
               </div>
-
               <div className="text-center">
                 <div className="w-20 h-20 bg-gradient-to-br from-primary to-coral rounded-full flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold">
                   3
@@ -215,10 +214,9 @@ export default function WholesalePage() {
               </div>
             </div>
           </div>
-        </section>
+        </RevealSection>
 
-        {/* Product Categories */}
-        <section className="py-20 bg-peach-lighter/30">
+        <RevealSection className="py-20 bg-peach-lighter/30">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4">
@@ -238,10 +236,7 @@ export default function WholesalePage() {
                 "젤/로션",
                 "위생용품"
               ].map((category, index) => (
-                <div
-                  key={index}
-                  className="bg-white rounded-2xl p-4 border border-border text-center hover:shadow-md hover:-translate-y-1 transition-all"
-                >
+                <div key={index} className="bg-white rounded-2xl p-4 border border-border text-center hover:shadow-md hover:-translate-y-1 transition-all h-full">
                   <div className="w-12 h-12 bg-peach-lighter rounded-xl flex items-center justify-center mx-auto mb-3">
                     <Package className="w-6 h-6 text-primary" />
                   </div>
@@ -250,10 +245,9 @@ export default function WholesalePage() {
               ))}
             </div>
           </div>
-        </section>
+        </RevealSection>
 
-        {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-br from-primary via-coral to-blush">
+        <RevealSection className="py-20 bg-gradient-to-br from-primary via-coral to-blush">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center text-white">
               <ShoppingBag className="w-12 h-12 mx-auto mb-6 opacity-80" />
@@ -278,7 +272,7 @@ export default function WholesalePage() {
               </Button>
             </div>
           </div>
-        </section>
+        </RevealSection>
       </main>
       <Footer />
     </div>

@@ -2,27 +2,27 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Sparkles } from "lucide-react"
 import { HeroStoreBackdrop } from "@/components/home/hero-store-backdrop"
-import { siteImages } from "@/lib/site-images"
+import { storePhotoSlots } from "@/lib/store-photos"
+import { RevealSection } from "@/components/motion/reveal"
 
-/** 배너 사진 경로: `lib/site-images.ts` 의 `homeBanner` */
+/** 배경 이미지: `lib/store-photos.ts` → `storePhotoSlots.homeHero` */
 export function HeroSection() {
   return (
-    <section
+    <RevealSection
+      mode="enter"
       role="banner"
       aria-label="아카모모 메인 소개"
-      className="relative min-h-[min(85vh,52rem)] md:min-h-[min(88vh,56rem)] overflow-hidden bg-background"
+      className="relative flex min-h-[min(85vh,52rem)] flex-col overflow-hidden bg-background md:min-h-[min(88vh,56rem)]"
     >
-      <HeroStoreBackdrop src={siteImages.homeBanner} priority />
+      <HeroStoreBackdrop src={storePhotoSlots.homeHero} priority />
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 md:py-32">
-        <div className="text-center max-w-4xl mx-auto">
-          {/* Badge */}
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 pb-28 pt-10 sm:px-6 sm:pb-32 sm:pt-12 lg:px-8 lg:pb-36">
+        <div className="mx-auto w-full max-w-4xl text-center">
           <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 mb-6 border border-peach-light shadow-sm">
             <Sparkles className="w-4 h-4 text-coral" />
             <span className="text-sm font-medium text-foreground">새로운 형태의 성인용품 가맹</span>
           </div>
 
-          {/* Main Headline */}
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight mb-6">
             <span className="text-balance">부담 없이 시작하는</span>
             <br />
@@ -30,14 +30,12 @@ export function HeroSection() {
             <span className="text-balance"> 프랜차이즈</span>
           </h1>
 
-          {/* Subheadline */}
           <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-10 max-w-2xl mx-auto text-pretty">
             기존의 딱딱하고 부담스러운 성인용품점은 이제 그만.
             <br className="hidden md:block" />
             밝고 친근한 라이프스타일 매장으로 새로운 가맹의 기회를 만나보세요.
           </p>
 
-          {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button
               asChild
@@ -61,7 +59,6 @@ export function HeroSection() {
         </div>
       </div>
 
-      {/* Wave Decoration */}
       <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-20">
         <svg viewBox="0 0 1440 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
           <path
@@ -71,6 +68,6 @@ export function HeroSection() {
           />
         </svg>
       </div>
-    </section>
+    </RevealSection>
   )
 }

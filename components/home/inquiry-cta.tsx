@@ -1,10 +1,11 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Phone, MessageCircle, ArrowRight } from "lucide-react"
+import { RevealSection } from "@/components/motion/reveal"
 
 export function InquiryCTA() {
   return (
-    <section className="py-20 bg-gradient-to-br from-primary via-coral to-blush relative overflow-hidden">
+    <RevealSection className="py-20 bg-gradient-to-br from-primary via-coral to-blush relative overflow-hidden">
       <div className="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
       <div className="absolute bottom-0 right-0 w-80 h-80 bg-white/10 rounded-full blur-3xl" />
 
@@ -61,6 +62,6 @@ export function InquiryCTA() {
           </div>
         </div>
       </div>
-    </section>
+    </RevealSection>
   )
 }
