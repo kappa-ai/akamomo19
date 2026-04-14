@@ -36,10 +36,6 @@ export default function BrandPage() {
                 아카모모만의 특별한 공간 철학을 만나보세요.
               </p>
             </div>
-
-            <div className="mt-10 md:mt-14 max-w-5xl mx-auto">
-              <StorePhotoRow images={storePhotoSlots.brandHeroDuo} aspect="video" />
-            </div>
           </div>
         </RevealSection>
 

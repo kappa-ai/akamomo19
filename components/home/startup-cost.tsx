@@ -6,12 +6,12 @@ const costItems = [
   {
     item: "인테리어 및 간판",
     cost: "1,700만원",
-    note: "15평 기준 (지역 및 면적에 따라 변동 될 수 있음)\n브랜드 컨셉에 맞는 도면 제공\n직접 공사 가능"
+    note: "15평 기준 (지역 및 면적에 따라 변동)\n브랜드 컨셉에 맞는 도면 제공\n직접 공사 가능"
   },
   {
     item: "출입인증기/키오스크/CCTV",
     cost: "500만원",
-    note: "출입인증기 및 키오스크 직접 구매 및 설치 가능"
+    note: "직접 구매 및 설치 가능"
   },
   {
     item: "초도물량",
@@ -27,13 +27,13 @@ const costItems = [
 
 const benefits: ReactNode[] = [
   "에어컨 및 냉난방기 설치 별도",
-  <span key="royalty" className="font-bold text-foreground">
+  <span key="royalty" className="font-bold text-red-600">
     매월 로열티 면제
   </span>,
-  <span key="mgmt" className="font-bold text-foreground">
+  <span key="mgmt" className="font-bold text-red-600">
     매월 관리비 면제
   </span>,
-  <span key="pr" className="font-bold text-foreground">
+  <span key="pr" className="font-bold text-red-600">
     매월 홍보비 면제
   </span>,
 ]
@@ -47,7 +47,7 @@ export function StartupCost() {
             가맹 <span className="text-primary">비용</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            합리적이고 투명한 가맹 비용으로 부담 없이 시작하세요
+            합리적이고 투명한 가맹 비용으로 부담없이 시작하세요
           </p>
         </div>
 
@@ -106,7 +106,7 @@ export function StartupCost() {
                   <div className="w-6 h-6 bg-peach-lighter rounded-full flex items-center justify-center shrink-0">
                     <Check className="w-4 h-4 text-primary" />
                   </div>
-                  <span className="text-muted-foreground">{benefit}</span>
+                  <span className={index === 0 ? "text-muted-foreground" : "text-red-600"}>{benefit}</span>
                 </div>
               ))}
             </div>

@@ -3,9 +3,6 @@ import { Footer } from "@/components/layout/footer"
 import { ShoppingBag, CheckCircle, Package, TrendingUp, Shield, Truck, Star, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import Image from "next/image"
-import { StorePhoto } from "@/components/store/store-media"
-import { storePhotoSlots } from "@/lib/store-photos"
 import { RevealSection } from "@/components/motion/reveal"
 
 const features = [
@@ -41,29 +38,6 @@ const features = [
   }
 ]
 
-const benefits = [
-  {
-    title: "경쟁력 있는 가격",
-    value: "도매가",
-    description: "일반 소매가 대비 최대 50% 이상 저렴한 가격"
-  },
-  {
-    title: "빠른 배송",
-    value: "1-2일",
-    description: "주문 후 1-2일 내 빠른 배송 완료"
-  },
-  {
-    title: "상품 종류",
-    value: "1,000+",
-    description: "다양한 카테고리의 1,000개 이상 상품"
-  },
-  {
-    title: "신상품 업데이트",
-    value: "매주",
-    description: "트렌드에 맞는 신상품 매주 업데이트"
-  }
-]
-
 export default function WholesalePage() {
   return (
     <div className="min-h-screen bg-background">
@@ -73,77 +47,35 @@ export default function WholesalePage() {
           <div className="absolute top-10 right-10 w-40 h-40 bg-blush/20 rounded-full blur-3xl" />
           <div className="absolute bottom-10 left-10 w-32 h-32 bg-lavender/30 rounded-full blur-2xl" />
 
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 mb-6 border border-peach-light">
-                  <ShoppingBag className="w-4 h-4 text-primary" />
-                  <span className="text-sm font-medium text-foreground">전용 도매몰</span>
-                </div>
-
-                <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
-                  점주 전용<br />
-                  <span className="text-primary">도매몰</span>을 소개합니다
-                </h1>
-
-                <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-                  아카모모 가맹점주만을 위한 특별한 도매몰에서
-                  <br />
-                  검증된 상품을 경쟁력 있는 가격에 만나보세요.
-                </p>
-
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button asChild className="rounded-full bg-primary hover:bg-coral text-white px-8">
-                    <Link href="/inquiry">가맹 문의하기</Link>
-                  </Button>
-                  <Button asChild variant="outline" className="rounded-full border-peach-light hover:bg-peach-lighter">
-                    <a href="https://b2b.akamomopartners.com/" target="_blank" rel="noopener noreferrer">
-                      도매몰 둘러보기
-                      <ArrowRight className="ml-2 w-4 h-4" />
-                    </a>
-                  </Button>
-                </div>
+          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-3xl text-center">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-peach-light bg-white/80 px-4 py-2 backdrop-blur-sm">
+                <ShoppingBag className="h-4 w-4 text-primary" />
+                <span className="text-sm font-medium text-foreground">전용 도매몰</span>
               </div>
 
-              <div className="relative">
-                <div className="bg-white rounded-3xl p-4 border border-border shadow-lg">
-                  <div className="aspect-video relative rounded-2xl overflow-hidden">
-                    <Image
-                      src="/wholesale-b2b-preview.png"
-                      alt="아카모모 by partners 점주 전용 B2B 도매몰"
-                      fill
-                      className="object-cover object-top"
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                      priority
-                    />
-                  </div>
-                  <div className="mt-4 text-center">
-                    <p className="text-sm text-muted-foreground">아카모모 점주 전용 도매몰 미리보기</p>
-                  </div>
-                </div>
-                <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-peach-light/30 rounded-full blur-2xl" />
-              </div>
-            </div>
-          </div>
-        </RevealSection>
+              <h1 className="mb-6 text-3xl font-bold text-foreground md:text-5xl">
+                점주 전용<br />
+                <span className="text-primary">도매몰</span>을 소개합니다
+              </h1>
 
-        <RevealSection className="py-16 bg-background">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto mb-12">
-              <StorePhoto
-                src={storePhotoSlots.wholesaleAccent}
-                aspect="video"
-                sizes="(max-width: 768px) 100vw, 48rem"
-              />
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {benefits.map((benefit, index) => (
-                <div key={index} className="bg-white rounded-3xl p-6 border border-border shadow-sm text-center h-full">
-                  <div className="text-3xl md:text-4xl font-bold text-primary mb-2">{benefit.value}</div>
-                  <p className="font-medium text-foreground mb-1">{benefit.title}</p>
-                  <p className="text-xs text-muted-foreground">{benefit.description}</p>
-                </div>
-              ))}
+              <p className="mb-8 text-lg leading-relaxed text-muted-foreground">
+                아카모모 가맹점주만을 위한 특별한 도매몰에서
+                <br />
+                검증된 상품을 경쟁력 있는 가격에 만나보세요.
+              </p>
+
+              <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
+                <Button asChild className="rounded-full bg-primary px-8 hover:bg-coral text-white">
+                  <Link href="/inquiry">가맹 문의하기</Link>
+                </Button>
+                <Button asChild variant="outline" className="rounded-full border-peach-light hover:bg-peach-lighter">
+                  <a href="https://b2b.akamomopartners.com/" target="_blank" rel="noopener noreferrer">
+                    도매몰 둘러보기
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </a>
+                </Button>
+              </div>
             </div>
           </div>
         </RevealSection>

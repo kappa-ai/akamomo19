@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Phone, MessageCircle, Mail, Clock, ChevronDown, ChevronUp, HelpCircle } from "lucide-react"
+import { Phone, MessageCircle, Clock, ChevronDown, ChevronUp, HelpCircle } from "lucide-react"
 import { useState } from "react"
 import { RevealSection } from "@/components/motion/reveal"
 
@@ -95,15 +95,15 @@ export default function InquiryPage() {
               </a>
 
               <a
-                href="mailto:contact@akamomo.co.kr"
+                href="#inquiry-form"
                 className="bg-white rounded-3xl p-6 border border-border shadow-sm hover:shadow-md transition-all flex items-center gap-4 group"
               >
                 <div className="w-14 h-14 bg-gradient-to-br from-peach-light to-blush rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform">
-                  <Mail className="w-7 h-7 text-white" />
+                  <MessageCircle className="w-7 h-7 text-white" />
                 </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">이메일 문의</p>
-                  <p className="text-lg font-bold text-foreground">contact@akamomo.co.kr</p>
+                  <p className="text-sm text-muted-foreground">온라인 상담</p>
+                  <p className="text-lg font-bold text-foreground">아래에서 상담 신청하기</p>
                 </div>
               </a>
 
@@ -124,7 +124,10 @@ export default function InquiryPage() {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid lg:grid-cols-2 gap-12">
               {/* Form */}
-              <div className="bg-white rounded-3xl p-8 md:p-10 border border-border shadow-sm">
+              <div
+                id="inquiry-form"
+                className="scroll-mt-24 bg-white rounded-3xl p-8 md:p-10 border border-border shadow-sm"
+              >
                 <h2 className="text-2xl font-bold text-foreground mb-2">온라인 상담 신청</h2>
                 <p className="text-muted-foreground mb-8">
                   아래 양식을 작성해 주시면 빠른 시간 내에 연락드리겠습니다.

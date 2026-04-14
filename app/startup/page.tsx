@@ -3,8 +3,6 @@ import { Footer } from "@/components/layout/footer"
 import { FranchiseProcess } from "@/components/home/franchise-process"
 import { StartupCost } from "@/components/home/startup-cost"
 import { InquiryCTA } from "@/components/home/inquiry-cta"
-import { StorePhotoRow } from "@/components/store/store-media"
-import { storePhotoSlots } from "@/lib/store-photos"
 import { Rocket } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -46,43 +44,6 @@ export default function StartupPage() {
                 </Button>
               </div>
             </div>
-          </div>
-        </RevealSection>
-
-        <RevealSection className="py-16 bg-background">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-              <div className="bg-white rounded-3xl p-6 border border-border shadow-sm text-center">
-                <div className="text-3xl md:text-4xl font-bold text-primary mb-2">50%+</div>
-                <p className="text-sm text-muted-foreground">높은 수익률</p>
-              </div>
-              <div className="bg-white rounded-3xl p-6 border border-border shadow-sm text-center">
-                <div className="text-3xl md:text-4xl font-bold text-primary mb-2">주 1회</div>
-                <p className="text-sm text-muted-foreground">매장 관리</p>
-              </div>
-              <div className="bg-white rounded-3xl p-6 border border-border shadow-sm text-center">
-                <div className="text-3xl md:text-4xl font-bold text-primary mb-2">0원</div>
-                <p className="text-sm text-muted-foreground">월 로열티</p>
-              </div>
-              <div className="bg-white rounded-3xl p-6 border border-border shadow-sm text-center">
-                <div className="text-3xl md:text-4xl font-bold text-primary mb-2">100%</div>
-                <p className="text-sm text-muted-foreground">본사 지원</p>
-              </div>
-            </div>
-          </div>
-        </RevealSection>
-
-        <RevealSection className="pb-16 md:pb-20 bg-background">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-10 md:mb-12">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4">
-                실제 <span className="text-primary">운영 매장</span>
-              </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                무인·부업형 운영이 가능한 실제 매장 환경을 참고해 보세요.
-              </p>
-            </div>
-            <StorePhotoRow images={storePhotoSlots.startupAfterStatsPair} aspect="video" />
           </div>
         </RevealSection>
 
