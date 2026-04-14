@@ -2,52 +2,14 @@ import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
 import { StorePhoto, StoreGalleryBand } from "@/components/store/store-media"
 import { STORE_PHOTOS_GALLERY_ORDER, storePhotoSlots } from "@/lib/store-photos"
+import { getStoresPublic } from "@/lib/stores-public"
+import type { StoreRow, UpcomingStoreRow } from "@/lib/stores-db"
 import { MapPin, Clock, Phone, Navigation, ChevronRight, TrendingUp } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { RevealSection } from "@/components/motion/reveal"
 
-const stores = [
-  {
-    name: "아카모모 강남점",
-    address: "서울특별시 강남구 강남대로 123",
-    phone: "02-1234-5678",
-    hours: "24시간 운영",
-    status: "운영중"
-  },
-  {
-    name: "아카모모 홍대점",
-    address: "서울특별시 마포구 홍익로 45",
-    phone: "02-2345-6789",
-    hours: "24시간 운영",
-    status: "운영중"
-  },
-  {
-    name: "아카모모 부산점",
-    address: "부산광역시 해운대구 해운대로 678",
-    phone: "051-3456-7890",
-    hours: "24시간 운영",
-    status: "운영중"
-  }
-]
-
-const upcomingStores = [
-  {
-    name: "아카모모 대구점",
-    region: "대구광역시",
-    status: "2024년 4월 오픈 예정"
-  },
-  {
-    name: "아카모모 인천점",
-    region: "인천광역시",
-    status: "2024년 5월 오픈 예정"
-  },
-  {
-    name: "아카모모 대전점",
-    region: "대전광역시",
-    status: "2024년 6월 오픈 예정"
-  }
-]
+export const dynamic = "force-dynamic"
 
 const regions = [
   { name: "서울/경기", count: 15, available: true },
@@ -57,10 +19,43 @@ const regions = [
   { name: "대전/충청", count: 4, available: true },
   { name: "광주/전라", count: 3, available: true },
   { name: "강원", count: 1, available: true },
-  { name: "제주", count: 1, available: true }
+  { name: "제주", count: 1, available: true },
 ]
 
-export default function StoresPage() {
+const operatingFallbacks = [...storePhotoSlots.storesOperatingCard]
+const upcomingFallbacks = [...storePhotoSlots.storesUpcomingCard]
+
+function OperatingStoreImage({ store, index }: { store: StoreRow; index: number }) {
+  const src =
+    store.image_url?.trim() ||
+    operatingFallbacks[index % operatingFallbacks.length]
+  return (
+    <StorePhoto
+      src={src}
+      aspect="video"
+      className="mb-4"
+      sizes="(max-width: 1024px) 100vw, 33vw"
+    />
+  )
+}
+
+function UpcomingStoreImage({ store, index }: { store: UpcomingStoreRow; index: number }) {
+  const src =
+    store.image_url?.trim() ||
+    upcomingFallbacks[index % upcomingFallbacks.length]
+  return (
+    <StorePhoto
+      src={src}
+      aspect="video"
+      className="mb-4 opacity-95"
+      sizes="(max-width: 1024px) 100vw, 33vw"
+    />
+  )
+}
+
+export default async function StoresPage() {
+  const data = await getStoresPublic()
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -86,6 +81,11 @@ export default function StoresPage() {
                 <br />
                 밝고 친근한 분위기의 매장이 여러분을 기다리고 있습니다.
               </p>
+              {data.source === "demo" && (
+                <p className="mt-4 text-xs text-muted-foreground">
+                  Supabase 미연동 시 예시 데이터가 표시됩니다. 연동 후 관리자 페이지에서 실제 매장을 등록할 수 있습니다.
+                </p>
+              )}
             </div>
           </div>
         </RevealSection>
@@ -124,46 +124,53 @@ export default function StoresPage() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {stores.map((store, index) => (
-                <div key={index} className="bg-white rounded-3xl p-6 border border-border shadow-sm hover:shadow-md transition-all h-full">
-                  <StorePhoto
-                    src={storePhotoSlots.storesOperatingCard[index]}
-                    aspect="video"
-                    className="mb-4"
-                    sizes="(max-width: 1024px) 100vw, 33vw"
-                  />
-                  <div className="flex items-center justify-between mb-4">
-                    <h3 className="text-lg font-semibold text-foreground">{store.name}</h3>
-                    <span className="bg-green-100 text-green-700 text-xs font-medium px-3 py-1 rounded-full">
-                      {store.status}
-                    </span>
-                  </div>
+            {data.operating.length === 0 ? (
+              <p className="text-center text-muted-foreground">등록된 운영 매장이 없습니다.</p>
+            ) : (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {data.operating.map((store, index) => (
+                  <div
+                    key={store.id}
+                    className="bg-white rounded-3xl p-6 border border-border shadow-sm hover:shadow-md transition-all h-full"
+                  >
+                    <OperatingStoreImage store={store} index={index} />
+                    <div className="flex items-center justify-between mb-4">
+                      <h3 className="text-lg font-semibold text-foreground">{store.name}</h3>
+                      <span className="bg-green-100 text-green-700 text-xs font-medium px-3 py-1 rounded-full">
+                        {store.status}
+                      </span>
+                    </div>
 
-                  <div className="space-y-3 text-sm">
-                    <div className="flex items-start gap-3">
-                      <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-muted-foreground">{store.address}</span>
+                    <div className="space-y-3 text-sm">
+                      <div className="flex items-start gap-3">
+                        <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                        <span className="text-muted-foreground">{store.address}</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <Phone className="w-5 h-5 text-primary shrink-0" />
+                        <span className="text-muted-foreground">{store.phone}</span>
+                      </div>
+                      <div className="flex items-center gap-3">
+                        <Clock className="w-5 h-5 text-primary shrink-0" />
+                        <span className="text-muted-foreground">{store.hours}</span>
+                      </div>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <Phone className="w-5 h-5 text-primary shrink-0" />
-                      <span className="text-muted-foreground">{store.phone}</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <Clock className="w-5 h-5 text-primary shrink-0" />
-                      <span className="text-muted-foreground">{store.hours}</span>
-                    </div>
-                  </div>
 
-                  <div className="mt-4 pt-4 border-t border-border">
-                    <button className="w-full flex items-center justify-center gap-2 text-primary font-medium hover:text-coral transition-colors">
-                      <Navigation className="w-4 h-4" />
-                      길찾기
-                    </button>
+                    <div className="mt-4 pt-4 border-t border-border">
+                      <a
+                        href={`https://map.naver.com/v5/search/${encodeURIComponent(store.address)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex w-full items-center justify-center gap-2 font-medium text-primary transition-colors hover:text-coral"
+                      >
+                        <Navigation className="w-4 h-4" />
+                        길찾기
+                      </a>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
         </RevealSection>
 
@@ -178,26 +185,28 @@ export default function StoresPage() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-              {upcomingStores.map((store, index) => (
-                <div key={index} className="bg-gradient-to-br from-peach-lighter to-cream rounded-3xl p-6 border border-border h-full">
-                  <StorePhoto
-                    src={storePhotoSlots.storesUpcomingCard[index]}
-                    aspect="video"
-                    className="mb-4 opacity-95"
-                    sizes="(max-width: 1024px) 100vw, 33vw"
-                  />
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="bg-primary/10 text-primary text-xs font-medium px-3 py-1 rounded-full">
-                      오픈 예정
-                    </span>
+            {data.upcoming.length === 0 ? (
+              <p className="text-center text-muted-foreground">오픈 예정 매장이 없습니다.</p>
+            ) : (
+              <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+                {data.upcoming.map((store, index) => (
+                  <div
+                    key={store.id}
+                    className="bg-gradient-to-br from-peach-lighter to-cream rounded-3xl p-6 border border-border h-full"
+                  >
+                    <UpcomingStoreImage store={store} index={index} />
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="bg-primary/10 text-primary text-xs font-medium px-3 py-1 rounded-full">
+                        오픈 예정
+                      </span>
+                    </div>
+                    <h3 className="text-lg font-semibold text-foreground mb-2">{store.name}</h3>
+                    <p className="text-sm text-muted-foreground mb-1">{store.region}</p>
+                    <p className="text-sm text-primary font-medium">{store.status}</p>
                   </div>
-                  <h3 className="text-lg font-semibold text-foreground mb-2">{store.name}</h3>
-                  <p className="text-sm text-muted-foreground mb-1">{store.region}</p>
-                  <p className="text-sm text-primary font-medium">{store.status}</p>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
         </RevealSection>
 
@@ -214,7 +223,10 @@ export default function StoresPage() {
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {regions.map((region, index) => (
-                <div key={index} className="bg-white rounded-2xl p-5 border border-border text-center hover:shadow-md transition-all h-full">
+                <div
+                  key={index}
+                  className="bg-white rounded-2xl p-5 border border-border text-center hover:shadow-md transition-all h-full"
+                >
                   <h3 className="font-semibold text-foreground mb-2">{region.name}</h3>
                   <p className="text-2xl font-bold text-primary">{region.count}개</p>
                   {region.available && (
