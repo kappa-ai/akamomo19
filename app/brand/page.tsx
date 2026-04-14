@@ -5,7 +5,7 @@ import { Differentiation } from "@/components/home/differentiation"
 import { TargetAudience } from "@/components/home/target-audience"
 import { SideJobOperation } from "@/components/brand/side-job-operation"
 import { HeadquartersSupport } from "@/components/brand/headquarters-support"
-import { StorePhotoRow } from "@/components/store/store-media"
+import { StorePhoto, StorePhotoRow } from "@/components/store/store-media"
 import { storePhotoSlots } from "@/lib/store-photos"
 import { Heart } from "lucide-react"
 import { RevealSection } from "@/components/motion/reveal"
@@ -15,26 +15,39 @@ export default function BrandPage() {
     <div className="min-h-screen bg-background">
       <Header />
       <main>
-        <RevealSection mode="enter" className="relative py-16 md:py-20 bg-gradient-to-b from-peach-lighter to-background overflow-hidden">
-          <div className="absolute top-10 right-10 w-40 h-40 bg-blush/20 rounded-full blur-3xl" />
-          <div className="absolute bottom-10 left-10 w-32 h-32 bg-lavender/30 rounded-full blur-2xl" />
+        <RevealSection
+          mode="enter"
+          className="relative overflow-hidden bg-gradient-to-b from-peach-lighter to-background pb-14 pt-16 md:pb-20 md:pt-20"
+        >
+          <div className="absolute top-10 right-10 h-40 w-40 rounded-full bg-blush/20 blur-3xl" />
+          <div className="absolute bottom-10 left-10 h-32 w-32 rounded-full bg-lavender/30 blur-2xl" />
 
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="text-center max-w-3xl mx-auto">
-              <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm rounded-full px-4 py-2 mb-6 border border-peach-light">
-                <Heart className="w-4 h-4 text-primary" />
+          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-3xl text-center">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-peach-light bg-white/80 px-4 py-2 backdrop-blur-sm">
+                <Heart className="h-4 w-4 text-primary" />
                 <span className="text-sm font-medium text-foreground">브랜드 소개</span>
               </div>
 
-              <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-4 text-balance">
+              <h1 className="mb-4 text-balance text-3xl font-bold text-foreground md:text-5xl">
                 <span className="text-primary">아카모모</span>를 소개합니다
               </h1>
 
-              <p className="text-lg text-muted-foreground leading-relaxed text-pretty">
+              <p className="text-pretty text-lg leading-relaxed text-muted-foreground">
                 부담 없이 경험하는 새로운 성인용품 라이프스타일,
                 <br className="hidden sm:block" />
                 아카모모만의 특별한 공간 철학을 만나보세요.
               </p>
+            </div>
+
+            <div className="mx-auto mt-10 max-w-4xl md:mt-14">
+              <StorePhoto
+                src={storePhotoSlots.homeHero}
+                aspect="landscape"
+                priority
+                sizes="(max-width: 768px) 100vw, 896px"
+                alt="아카모모 매장 공간"
+              />
             </div>
           </div>
         </RevealSection>

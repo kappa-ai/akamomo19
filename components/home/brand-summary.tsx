@@ -3,14 +3,14 @@ import { RevealSection } from "@/components/motion/reveal"
 
 export function BrandSummary() {
   return (
-    <RevealSection className="py-20 md:py-24 bg-peach-lighter/25 border-y border-border/30">
+    <RevealSection className="border-y border-border/30 bg-peach-lighter/25 py-16 pt-20 md:py-24 md:pt-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground tracking-tight text-balance">
             <span className="text-primary">아카모모</span>가 지향하는 공간
           </h2>
           <p className="mt-3 md:mt-4 text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl mx-auto">
-            딱딱한 판매 공간이 아니라, 누구나 편하게 머물 수 있는 라이프스타일 브랜드입니다.
+            판매뿐만 아니라, 편하게 머물 수 있는 라이프스타일형 브랜드입니다. 
           </p>
 
           <blockquote className="mt-10 md:mt-14 mx-auto max-w-2xl border-0 p-0">
@@ -18,7 +18,7 @@ export function BrandSummary() {
               <span className="text-primary/80 font-serif text-2xl md:text-3xl leading-none align-top mr-0.5" aria-hidden>
                 &ldquo;
               </span>
-              판매만 하는 딱딱한 자판기형식의 성인용품점은 이제 그만.
+              판매만 하는 자판기 형식의 딱딱한 성인용품점은 이제 그만.
               <span className="text-primary/80 font-serif text-2xl md:text-3xl leading-none align-top ml-0.5" aria-hidden>
                 &rdquo;
               </span>
@@ -58,7 +58,7 @@ export function BrandSummary() {
               </div>
               <h3 className="text-lg font-semibold text-foreground mb-2">라이프스타일</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">
-                단순 판매가 아닌 새로운 경험을 선사하는 공간입니다
+                단순 판매가 아닌 색다른 경험을 선사합니다
               </p>
             </div>
           </div>

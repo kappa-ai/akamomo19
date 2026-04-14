@@ -53,12 +53,12 @@ export function InquiryCTA() {
           <div className="mx-auto grid max-w-3xl grid-cols-1 gap-4 md:grid-cols-3">
             <a
               href="tel:1588-0000"
-              className="group flex items-center gap-4 rounded-2xl border border-border bg-white p-4 shadow-sm transition-all hover:shadow-md"
+              className="group flex min-w-0 items-center gap-4 rounded-2xl border border-border bg-white p-4 shadow-sm transition-all hover:shadow-md"
             >
               <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-coral transition-transform group-hover:scale-105">
                 <Phone className="h-7 w-7 text-white" />
               </div>
-              <div className="text-left">
+              <div className="min-w-0 flex-1 text-left">
                 <p className="text-sm text-muted-foreground">전화 상담</p>
                 <p className="text-xl font-bold text-foreground">1588-0000</p>
               </div>
@@ -66,24 +66,26 @@ export function InquiryCTA() {
 
             <a
               href="mailto:contact@akamomo.co.kr"
-              className="group flex items-center gap-4 rounded-2xl border border-border bg-white p-4 shadow-sm transition-all hover:shadow-md"
+              className="group flex min-w-0 items-center gap-4 rounded-2xl border border-border bg-white p-4 shadow-sm transition-all hover:shadow-md"
             >
               <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-peach-light to-blush transition-transform group-hover:scale-105">
                 <Mail className="h-7 w-7 text-white" />
               </div>
-              <div className="text-left">
+              <div className="min-w-0 flex-1 text-left">
                 <p className="text-sm text-muted-foreground">이메일 문의</p>
-                <p className="text-lg font-bold text-foreground">contact@akamomo.co.kr</p>
+                <p className="break-words text-base font-bold leading-snug text-foreground [overflow-wrap:anywhere] sm:text-lg">
+                  contact@akamomo.co.kr
+                </p>
               </div>
             </a>
 
-            <div className="flex items-center gap-4 rounded-2xl border border-border bg-white p-4 shadow-sm">
+            <div className="flex min-w-0 items-center gap-4 rounded-2xl border border-border bg-white p-4 shadow-sm">
               <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-peach-lighter">
                 <Clock className="h-7 w-7 text-primary" />
               </div>
-              <div className="text-left">
+              <div className="min-w-0 flex-1 text-left">
                 <p className="text-sm text-muted-foreground">상담 가능 시간</p>
-                <p className="text-lg font-bold text-foreground">평일 09:00 - 18:00</p>
+                <p className="text-base font-bold leading-snug text-foreground sm:text-lg">평일 09:00 - 18:00</p>
               </div>
             </div>
           </div>
