@@ -12,7 +12,7 @@ REST(anon 키)만으로는 `CREATE TABLE`이나 `auth` 쪽 시드 같은 걸 못
 
 | 파일 | 내용 |
 |------|------|
-| 루트 **`.env`** | `NEXT_PUBLIC_*` — Next 앱용. (선택) `DATABASE_URL` 은 **B** 경로일 때만. |
+| 루트 **`.env`** | `NEXT_PUBLIC_*` — Next 앱용. 저장소에 포함해 두면 Vercel에 따로 넣지 않아도 빌드에 반영됩니다. (선택) `DATABASE_URL` 은 **B** 경로일 때만. |
 | `supabase/migrations/001_stores.sql` | 매장 테이블·RLS·`admin_users` |
 | `supabase/sql/seed_admin_user.sql` | 이메일·비밀번호 있는 **관리자 1명**을 `auth` + `public.admin_users`에 한 번에 넣기 |
 | `npm run db:apply` | 위 SQL 두 개를 CLI로 순서대로 실행 (`scripts/supabase-apply-sql.sh`) |

@@ -7,8 +7,7 @@ __v0_jsx-dev-runtime.ts
 .vercel/
 next.user-config.*
 
-# Environment variables
-.env
+# Environment variables (로컬 덮어쓰기만; 기본은 저장소 .env 사용)
 .env*.local
 
 # Common ignores
