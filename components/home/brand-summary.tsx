@@ -3,7 +3,7 @@ import { RevealSection } from "@/components/motion/reveal"
 
 export function BrandSummary() {
   return (
-    <RevealSection className="border-y border-border/30 bg-peach-lighter/25 py-16 pt-20 md:py-24 md:pt-28">
+    <RevealSection className="border-y border-border/30 bg-peach-lighter/25 py-20 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground tracking-tight text-balance">

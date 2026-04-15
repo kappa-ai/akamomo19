@@ -4,6 +4,7 @@ import { ShoppingBag, CheckCircle, Package, TrendingUp, Shield, Truck, Star, Arr
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { RevealSection } from "@/components/motion/reveal"
+import { getSiteContact } from "@/lib/get-site-contact"
 
 const features = [
   {
@@ -38,7 +39,8 @@ const features = [
   }
 ]
 
-export default function WholesalePage() {
+export default async function WholesalePage() {
+  const contact = await getSiteContact()
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -206,7 +208,7 @@ export default function WholesalePage() {
           </div>
         </RevealSection>
       </main>
-      <Footer />
+      <Footer contact={contact} />
     </div>
   )
 }

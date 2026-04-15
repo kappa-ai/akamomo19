@@ -1,4 +1,4 @@
-import { TrendingUp, Clock, Check } from "lucide-react"
+import { Clock, Check } from "lucide-react"
 import { RevealSection } from "@/components/motion/reveal"
 
 export function SideJobOperation() {
@@ -14,8 +14,8 @@ export function SideJobOperation() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-          <div className="bg-gradient-to-br from-peach-lighter to-cream rounded-3xl p-8">
+        <div className="mx-auto flex max-w-4xl justify-center px-0">
+          <div className="w-full max-w-2xl bg-gradient-to-br from-peach-lighter to-cream rounded-3xl p-8">
             <h3 className="text-xl font-bold text-foreground mb-6 flex items-center gap-3">
               <Clock className="w-6 h-6 text-primary" />
               운영의 단순성

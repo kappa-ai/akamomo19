@@ -7,8 +7,13 @@ import { Rocket } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { RevealSection } from "@/components/motion/reveal"
+import { getSiteContact } from "@/lib/get-site-contact"
+import { telHref } from "@/lib/site-contact"
 
-export default function StartupPage() {
+export default async function StartupPage() {
+  const contact = await getSiteContact()
+  const phoneHref = telHref(contact.phone)
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -40,7 +45,7 @@ export default function StartupPage() {
                   <Link href="/inquiry">가맹 상담 신청하기</Link>
                 </Button>
                 <Button asChild variant="outline" className="rounded-full border-peach-light hover:bg-peach-lighter">
-                  <a href="tel:1588-0000">전화 상담: 1588-0000</a>
+                  <a href={phoneHref}>전화 상담: {contact.phone}</a>
                 </Button>
               </div>
             </div>
@@ -49,9 +54,9 @@ export default function StartupPage() {
 
         <StartupCost />
         <FranchiseProcess />
-        <InquiryCTA />
+        <InquiryCTA contact={contact} />
       </main>
-      <Footer />
+      <Footer contact={contact} />
     </div>
   )
 }

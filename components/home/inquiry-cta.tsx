@@ -2,8 +2,13 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Phone, MessageCircle, ArrowRight, Mail, Clock } from "lucide-react"
 import { RevealSection } from "@/components/motion/reveal"
+import type { SiteContact } from "@/lib/site-contact"
+import { mailtoHref, telHref } from "@/lib/site-contact"
 
-export function InquiryCTA() {
+export function InquiryCTA({ contact }: { contact: SiteContact }) {
+  const phoneHref = telHref(contact.phone)
+  const emailHref = mailtoHref(contact.contact_email)
+
   return (
     <RevealSection className="relative overflow-hidden bg-gradient-to-b from-peach-lighter to-background py-20">
       <div className="absolute top-10 right-10 h-40 w-40 rounded-full bg-blush/20 blur-3xl" />
@@ -43,16 +48,16 @@ export function InquiryCTA() {
               size="lg"
               className="rounded-full border-peach-light bg-white/80 px-8 py-6 text-lg text-foreground hover:bg-peach-lighter"
             >
-              <a href="tel:1588-0000">
+              <a href={phoneHref}>
                 <Phone className="mr-2 h-5 w-5" />
-                전화 상담: 1588-0000
+                전화 상담: {contact.phone}
               </a>
             </Button>
           </div>
 
           <div className="mx-auto grid max-w-3xl grid-cols-1 gap-4 md:grid-cols-3">
             <a
-              href="tel:1588-0000"
+              href={phoneHref}
               className="group flex min-w-0 items-center gap-4 rounded-2xl border border-border bg-white p-4 shadow-sm transition-all hover:shadow-md"
             >
               <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-coral transition-transform group-hover:scale-105">
@@ -60,12 +65,12 @@ export function InquiryCTA() {
               </div>
               <div className="min-w-0 flex-1 text-left">
                 <p className="text-sm text-muted-foreground">전화 상담</p>
-                <p className="text-xl font-bold text-foreground">1588-0000</p>
+                <p className="text-xl font-bold text-foreground">{contact.phone}</p>
               </div>
             </a>
 
             <a
-              href="mailto:contact@akamomo.co.kr"
+              href={emailHref}
               className="group flex min-w-0 items-center gap-4 rounded-2xl border border-border bg-white p-4 shadow-sm transition-all hover:shadow-md"
             >
               <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-peach-light to-blush transition-transform group-hover:scale-105">
@@ -74,7 +79,7 @@ export function InquiryCTA() {
               <div className="min-w-0 flex-1 text-left">
                 <p className="text-sm text-muted-foreground">이메일 문의</p>
                 <p className="break-words text-base font-bold leading-snug text-foreground [overflow-wrap:anywhere] sm:text-lg">
-                  contact@akamomo.co.kr
+                  {contact.contact_email}
                 </p>
               </div>
             </a>

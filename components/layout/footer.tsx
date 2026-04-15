@@ -1,7 +1,11 @@
 import Link from "next/link"
 import Image from "next/image"
+import type { SiteContact } from "@/lib/site-contact"
+import { telHref } from "@/lib/site-contact"
 
-export function Footer() {
+export function Footer({ contact }: { contact: SiteContact }) {
+  const phoneHref = telHref(contact.phone)
+
   return (
     <footer className="bg-secondary border-t border-border">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
@@ -23,10 +27,15 @@ export function Footer() {
             </p>
             <div className="text-sm text-muted-foreground space-y-1">
               <p>상호명: 아카모모</p>
-              <p>대표: 홍길동</p>
-              <p>사업자등록번호: 000-00-00000</p>
-              <p>이메일: contact@akamomo.co.kr</p>
-              <p>전화: 1588-0000</p>
+              <p>대표: {contact.ceo_name}</p>
+              <p>사업자등록번호: {contact.business_reg_no}</p>
+              <p>이메일: {contact.contact_email}</p>
+              <p>
+                전화:{" "}
+                <a href={phoneHref} className="underline-offset-2 hover:text-primary hover:underline">
+                  {contact.phone}
+                </a>
+              </p>
             </div>
           </div>
 
@@ -61,11 +70,14 @@ export function Footer() {
           <div>
             <h4 className="font-semibold text-foreground mb-4">가맹 문의</h4>
             <div className="space-y-3">
-              <div className="bg-white rounded-2xl p-4 border border-border">
+              <a
+                href={phoneHref}
+                className="block bg-white rounded-2xl p-4 border border-border transition-colors hover:border-primary/30"
+              >
                 <p className="text-xs text-muted-foreground mb-1">전화 상담</p>
-                <p className="text-lg font-bold text-primary">1588-0000</p>
+                <p className="text-lg font-bold text-primary">{contact.phone}</p>
                 <p className="text-xs text-muted-foreground mt-1">평일 09:00 - 18:00</p>
-              </div>
+              </a>
               <Link
                 href="/inquiry"
                 className="block text-center bg-primary text-white rounded-full py-3 text-sm font-medium hover:bg-coral transition-colors"

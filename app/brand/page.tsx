@@ -5,19 +5,21 @@ import { Differentiation } from "@/components/home/differentiation"
 import { TargetAudience } from "@/components/home/target-audience"
 import { SideJobOperation } from "@/components/brand/side-job-operation"
 import { HeadquartersSupport } from "@/components/brand/headquarters-support"
-import { StorePhoto, StorePhotoRow } from "@/components/store/store-media"
+import { StorePhotoRow } from "@/components/store/store-media"
 import { storePhotoSlots } from "@/lib/store-photos"
 import { Heart } from "lucide-react"
 import { RevealSection } from "@/components/motion/reveal"
+import { getSiteContact } from "@/lib/get-site-contact"
 
-export default function BrandPage() {
+export default async function BrandPage() {
+  const contact = await getSiteContact()
   return (
     <div className="min-h-screen bg-background">
       <Header />
       <main>
         <RevealSection
           mode="enter"
-          className="relative overflow-hidden bg-gradient-to-b from-peach-lighter to-background pb-14 pt-16 md:pb-20 md:pt-20"
+          className="relative overflow-hidden bg-gradient-to-b from-peach-lighter to-background py-20 md:py-24"
         >
           <div className="absolute top-10 right-10 h-40 w-40 rounded-full bg-blush/20 blur-3xl" />
           <div className="absolute bottom-10 left-10 h-32 w-32 rounded-full bg-lavender/30 blur-2xl" />
@@ -38,16 +40,6 @@ export default function BrandPage() {
                 <br className="hidden sm:block" />
                 아카모모만의 특별한 공간 철학을 만나보세요.
               </p>
-            </div>
-
-            <div className="mx-auto mt-10 max-w-4xl md:mt-14">
-              <StorePhoto
-                src={storePhotoSlots.homeHero}
-                aspect="landscape"
-                priority
-                sizes="(max-width: 768px) 100vw, 896px"
-                alt="아카모모 매장 공간"
-              />
             </div>
           </div>
         </RevealSection>
@@ -73,7 +65,7 @@ export default function BrandPage() {
         <TargetAudience />
         <HeadquartersSupport />
       </main>
-      <Footer />
+      <Footer contact={contact} />
     </div>
   )
 }

@@ -3,6 +3,7 @@ import { Footer } from "@/components/layout/footer"
 import { StorePhoto, StoreGalleryBand } from "@/components/store/store-media"
 import { STORE_PHOTOS_GALLERY_ORDER, storePhotoSlots } from "@/lib/store-photos"
 import { getStoresPublic } from "@/lib/stores-public"
+import { getSiteContact } from "@/lib/get-site-contact"
 import type { StoreRow, UpcomingStoreRow } from "@/lib/stores-db"
 import { MapPin, Clock, Phone, Navigation, ChevronRight, TrendingUp } from "lucide-react"
 import Link from "next/link"
@@ -54,7 +55,7 @@ function UpcomingStoreImage({ store, index }: { store: UpcomingStoreRow; index: 
 }
 
 export default async function StoresPage() {
-  const data = await getStoresPublic()
+  const [data, contact] = await Promise.all([getStoresPublic(), getSiteContact()])
 
   return (
     <div className="min-h-screen bg-background">
@@ -275,7 +276,7 @@ export default async function StoresPage() {
           </div>
         </RevealSection>
       </main>
-      <Footer />
+      <Footer contact={contact} />
     </div>
   )
 }
