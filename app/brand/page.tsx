@@ -19,7 +19,7 @@ export default async function BrandPage() {
       <main>
         <RevealSection
           mode="enter"
-          className="relative overflow-hidden bg-gradient-to-b from-peach-lighter to-background py-20"
+          className="relative overflow-hidden bg-gradient-to-b from-peach-lighter to-background pt-20 pb-28 md:pb-40"
         >
           <div className="absolute top-10 right-10 h-40 w-40 rounded-full bg-blush/20 blur-3xl" />
           <div className="absolute bottom-10 left-10 h-32 w-32 rounded-full bg-lavender/30 blur-2xl" />
