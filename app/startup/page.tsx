@@ -2,7 +2,6 @@ import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
 import { FranchiseProcess } from "@/components/home/franchise-process"
 import { StartupCost } from "@/components/home/startup-cost"
-import { InquiryCTA } from "@/components/home/inquiry-cta"
 import { Rocket } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
@@ -54,7 +53,6 @@ export default async function StartupPage() {
 
         <StartupCost />
         <FranchiseProcess />
-        <InquiryCTA contact={contact} />
       </main>
       <Footer contact={contact} />
     </div>
