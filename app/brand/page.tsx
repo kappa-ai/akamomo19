@@ -19,23 +19,23 @@ export default async function BrandPage() {
       <main>
         <RevealSection
           mode="enter"
-          className="relative overflow-hidden bg-gradient-to-b from-peach-lighter to-background py-20 md:py-24"
+          className="relative overflow-hidden bg-gradient-to-b from-peach-lighter to-background py-20"
         >
           <div className="absolute top-10 right-10 h-40 w-40 rounded-full bg-blush/20 blur-3xl" />
           <div className="absolute bottom-10 left-10 h-32 w-32 rounded-full bg-lavender/30 blur-2xl" />
 
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="mx-auto max-w-3xl text-center">
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-peach-light bg-white/80 px-4 py-2 backdrop-blur-sm">
-                <Heart className="h-4 w-4 text-primary" />
+            <div className="mx-auto flex w-full max-w-3xl flex-col items-center text-center">
+              <div className="mb-6 inline-flex items-center justify-center gap-2 rounded-full border border-peach-light bg-white/80 px-4 py-2 backdrop-blur-sm">
+                <Heart className="h-4 w-4 shrink-0 text-primary" />
                 <span className="text-sm font-medium text-foreground">브랜드 소개</span>
               </div>
 
-              <h1 className="mb-4 text-balance text-3xl font-bold text-foreground md:text-5xl">
+              <h1 className="mb-4 w-full text-balance text-center text-3xl font-bold text-foreground md:text-5xl">
                 <span className="text-primary">아카모모</span>를 소개합니다
               </h1>
 
-              <p className="text-pretty text-lg leading-relaxed text-muted-foreground">
+              <p className="max-w-2xl text-pretty text-center text-lg leading-relaxed text-muted-foreground">
                 부담 없이 경험하는 새로운 성인용품 라이프스타일,
                 <br className="hidden sm:block" />
                 아카모모만의 특별한 공간 철학을 만나보세요.
