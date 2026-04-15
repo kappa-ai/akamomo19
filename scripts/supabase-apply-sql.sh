@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# 001_stores.sql → seed_admin_user.sql 순서로 원격에 적용합니다.
+# 001_stores.sql → 002_storage_store_images.sql → seed_admin_user.sql 순서로 원격에 적용합니다.
 # 관리자는 대시보드 Add user + admin_users 가 더 단순합니다. seed 는 생략해도 됨(스크립트에서 두 번째 줄 제거).
 #
 # Supabase는 “별도 SQL 서버”가 아니라 호스팅 Postgres + PostgREST(API) 조합입니다.
@@ -22,19 +22,21 @@ fi
 
 run_linked() {
   supabase db query --linked --agent=no -f "$ROOT/supabase/migrations/001_stores.sql"
+  supabase db query --linked --agent=no -f "$ROOT/supabase/migrations/002_storage_store_images.sql"
   supabase db query --linked --agent=no -f "$ROOT/supabase/sql/seed_admin_user.sql"
 }
 
 run_db_url() {
   local url="$1"
   supabase db query --db-url "$url" --agent=no -f "$ROOT/supabase/migrations/001_stores.sql"
+  supabase db query --db-url "$url" --agent=no -f "$ROOT/supabase/migrations/002_storage_store_images.sql"
   supabase db query --db-url "$url" --agent=no -f "$ROOT/supabase/sql/seed_admin_user.sql"
 }
 
 if supabase db query --linked "select 1 as ok" --agent=no >/dev/null 2>&1; then
   echo "연결: Supabase CLI --linked (프로젝트에 link 됨)"
   run_linked
-  echo "OK: 001_stores.sql + seed_admin_user.sql"
+  echo "OK: 001 + 002_storage + seed_admin_user.sql"
   exit 0
 fi
 
@@ -69,4 +71,4 @@ PY
 
 echo "연결: DATABASE_URL (Supabase 대시보드에서 준 Postgres 접속 문자열)"
 run_db_url "$DATABASE_URL"
-echo "OK: 001_stores.sql + seed_admin_user.sql"
+echo "OK: 001 + 002_storage + seed_admin_user.sql"

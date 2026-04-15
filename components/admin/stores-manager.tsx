@@ -1,12 +1,13 @@
 "use client"
 
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react"
 import { createBrowserClient } from "@supabase/ssr"
 import type { StoreRow, UpcomingStoreRow } from "@/lib/stores-db"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Trash2, Pencil, Plus } from "lucide-react"
+import { StoreImageUrlField } from "@/components/admin/store-image-url-field"
 
 function useSupabase() {
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL!
@@ -321,6 +322,11 @@ function OperatingForm({
   const [status, setStatus] = useState(initial.status)
   const [imageUrl, setImageUrl] = useState(initial.image_url ?? "")
   const [sortOrder, setSortOrder] = useState(String(initial.sort_order))
+  const draftStorageKey = useRef<string | null>(null)
+  if (!initial.id) {
+    if (!draftStorageKey.current) draftStorageKey.current = crypto.randomUUID()
+  }
+  const storageEntityKey = initial.id || draftStorageKey.current!
 
   return (
     <div className="mb-6 space-y-4 rounded-2xl border border-dashed border-primary/40 bg-peach-lighter/20 p-4">
@@ -346,16 +352,7 @@ function OperatingForm({
           <Label htmlFor="op-status">상태 라벨</Label>
           <Input id="op-status" value={status} onChange={(e) => setStatus(e.target.value)} className="rounded-xl" />
         </div>
-        <div className="space-y-1 sm:col-span-2">
-          <Label htmlFor="op-img">이미지 URL (선택)</Label>
-          <Input
-            id="op-img"
-            value={imageUrl}
-            onChange={(e) => setImageUrl(e.target.value)}
-            placeholder="https://..."
-            className="rounded-xl"
-          />
-        </div>
+        <StoreImageUrlField kind="operating" entityKey={storageEntityKey} value={imageUrl} onChange={setImageUrl} />
         <div className="space-y-1">
           <Label htmlFor="op-sort">정렬 순서 (숫자)</Label>
           <Input id="op-sort" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)} className="rounded-xl" />
@@ -402,6 +399,11 @@ function UpcomingForm({
   const [status, setStatus] = useState(initial.status)
   const [imageUrl, setImageUrl] = useState(initial.image_url ?? "")
   const [sortOrder, setSortOrder] = useState(String(initial.sort_order))
+  const draftStorageKey = useRef<string | null>(null)
+  if (!initial.id) {
+    if (!draftStorageKey.current) draftStorageKey.current = crypto.randomUUID()
+  }
+  const storageEntityKey = initial.id || draftStorageKey.current!
 
   return (
     <div className="mb-6 space-y-4 rounded-2xl border border-dashed border-primary/40 bg-peach-lighter/20 p-4">
@@ -419,10 +421,7 @@ function UpcomingForm({
           <Label htmlFor="up-status">오픈 안내 문구</Label>
           <Input id="up-status" value={status} onChange={(e) => setStatus(e.target.value)} className="rounded-xl" />
         </div>
-        <div className="space-y-1 sm:col-span-2">
-          <Label htmlFor="up-img">이미지 URL (선택)</Label>
-          <Input id="up-img" value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} className="rounded-xl" />
-        </div>
+        <StoreImageUrlField kind="upcoming" entityKey={storageEntityKey} value={imageUrl} onChange={setImageUrl} />
         <div className="space-y-1">
           <Label htmlFor="up-sort">정렬 순서</Label>
           <Input id="up-sort" value={sortOrder} onChange={(e) => setSortOrder(e.target.value)} className="rounded-xl" />
