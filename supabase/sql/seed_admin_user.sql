@@ -1,14 +1,18 @@
--- 관리자 계정 1명을 SQL로만 생성합니다. (대시보드 Add user 불필요)
--- 선행: supabase/migrations/001_stores.sql 을 먼저 Supabase SQL Editor에서 실행해 두세요.
+-- [선택] SQL로만 관리자 1명을 넣을 때 사용합니다.
+-- 운영에서는 docs/SUPABASE_OWNER_HANDOFF.md 처럼 "Add user + admin_users insert" 가 더 단순합니다.
 --
--- 아래 admin_email, admin_password 만 바꾼 뒤 통째로 실행하세요.
+-- 선행: supabase/migrations/001_stores.sql 실행 완료.
+-- 아래 admin_email, admin_password 만 바꾼 뒤 통째로 실행.
+--
+-- 문제 시: Authentication → Users → Add user 로 동일 이메일을 만들고,
+--           기존 SQL 사용자·identities 는 삭제한 뒤 admin_users 만 UUID로 insert.
 
 create extension if not exists pgcrypto;
 
 do $$
 declare
-  admin_email text := 'admin@akamomo.local';
-  admin_password text := 'changeme';
+  admin_email text := 'admin@example.com';
+  admin_password text := 'change-me';
   new_id uuid := gen_random_uuid();
   enc text;
 begin
@@ -29,7 +33,11 @@ begin
     raw_app_meta_data,
     raw_user_meta_data,
     created_at,
-    updated_at
+    updated_at,
+    confirmation_token,
+    recovery_token,
+    email_change,
+    email_change_token_new
   ) values (
     new_id,
     '00000000-0000-0000-0000-000000000000',
@@ -41,7 +49,11 @@ begin
     '{"provider":"email","providers":["email"]}'::jsonb,
     '{}'::jsonb,
     now(),
-    now()
+    now(),
+    '',
+    '',
+    '',
+    ''
   );
 
   insert into auth.identities (
@@ -54,7 +66,7 @@ begin
     created_at,
     updated_at
   ) values (
-    gen_random_uuid(),
+    new_id,
     new_id,
     jsonb_build_object(
       'sub', new_id::text,

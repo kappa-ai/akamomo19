@@ -1,5 +1,5 @@
 -- Supabase SQL Editor에서 프로젝트당 1회 실행.
--- 관리자 계정은 supabase/sql/seed_admin_user.sql 로 생성.
+-- 관리자: 대시보드 Authentication → Add user 후 public.admin_users 에 UUID insert (docs/SUPABASE_OWNER_HANDOFF.md).
 
 create table if not exists public.admin_users (
   user_id uuid primary key references auth.users (id) on delete cascade

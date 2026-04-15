@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # 001_stores.sql → seed_admin_user.sql 순서로 원격에 적용합니다.
+# 관리자는 대시보드 Add user + admin_users 가 더 단순합니다. seed 는 생략해도 됨(스크립트에서 두 번째 줄 제거).
 #
 # Supabase는 “별도 SQL 서버”가 아니라 호스팅 Postgres + PostgREST(API) 조합입니다.
 # 대시보드 SQL Editor가 실행하는 것도 이 Postgres입니다.

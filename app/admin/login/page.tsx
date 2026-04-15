@@ -35,7 +35,25 @@ export default function AdminLoginPage() {
     })
     setLoading(false)
     if (error) {
-      setMessage(error.message === "Invalid login credentials" ? "이메일 또는 비밀번호가 올바르지 않습니다." : error.message)
+      const code = "code" in error ? String((error as { code?: string }).code) : ""
+      const invalidCreds =
+        code === "invalid_credentials" || error.message === "Invalid login credentials"
+      if (invalidCreds) {
+        setMessage(
+          "이메일·비밀번호를 확인하세요. Supabase Authentication → Add user(Auto Confirm)로 만든 계정인지, 그 UUID가 admin_users에 들어갔는지, 사이트의 Supabase URL이 그 프로젝트와 같은지 확인하세요."
+        )
+        return
+      }
+      if (
+        code === "unexpected_failure" ||
+        error.message.includes("Database error querying schema")
+      ) {
+        setMessage(
+          "인증 오류입니다. Users에서 해당 사용자를 삭제한 뒤 Add user(Auto Confirm)로 다시 만들고, UUID를 admin_users에 넣는 방식이 가장 빠릅니다."
+        )
+        return
+      }
+      setMessage(error.message)
       return
     }
     router.push("/admin/stores")
