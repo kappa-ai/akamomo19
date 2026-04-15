@@ -12,7 +12,7 @@ export function HeroSection() {
       mode="enter"
       role="banner"
       aria-label="아카모모 메인 소개"
-      className="relative flex min-h-[min(85vh,52rem)] flex-col overflow-hidden bg-background md:min-h-[min(88vh,56rem)]"
+      className="relative flex min-h-[calc(100svh-4rem)] flex-col overflow-hidden bg-background"
     >
       <HeroStoreBackdrop src={storePhotoSlots.homeHero} priority />
 

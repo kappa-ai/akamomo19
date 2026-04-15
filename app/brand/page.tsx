@@ -19,23 +19,24 @@ export default async function BrandPage() {
       <main>
         <RevealSection
           mode="enter"
-          className="relative overflow-hidden bg-gradient-to-b from-peach-lighter to-background pt-20 pb-28 md:pb-40"
+          aria-label="브랜드 소개 히어로"
+          className="relative flex min-h-[calc(100svh-4rem)] flex-col overflow-hidden bg-gradient-to-b from-peach-lighter to-background"
         >
           <div className="absolute top-10 right-10 h-40 w-40 rounded-full bg-blush/20 blur-3xl" />
           <div className="absolute bottom-10 left-10 h-32 w-32 rounded-full bg-lavender/30 blur-2xl" />
 
-          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 pb-28 pt-10 sm:px-6 sm:pb-32 sm:pt-12 lg:px-8 lg:pb-36">
             <div className="mx-auto flex w-full max-w-3xl flex-col items-center text-center">
-              <div className="mb-6 inline-flex items-center justify-center gap-2 rounded-full border border-peach-light bg-white/80 px-4 py-2 backdrop-blur-sm">
+              <div className="mb-6 inline-flex items-center justify-center gap-2 rounded-full border border-peach-light bg-white/80 px-4 py-2 shadow-sm backdrop-blur-sm">
                 <Heart className="h-4 w-4 shrink-0 text-primary" />
                 <span className="text-sm font-medium text-foreground">브랜드 소개</span>
               </div>
 
-              <h1 className="mb-4 w-full text-balance text-center text-3xl font-bold text-foreground md:text-5xl">
+              <h1 className="mb-4 w-full text-balance text-center text-3xl font-bold leading-tight text-foreground md:text-5xl lg:text-6xl">
                 <span className="text-primary">아카모모</span>를 소개합니다
               </h1>
 
-              <p className="max-w-2xl text-pretty text-center text-lg leading-relaxed text-muted-foreground">
+              <p className="max-w-2xl text-pretty text-center text-lg leading-relaxed text-muted-foreground md:text-xl">
                 부담 없이 경험하는 새로운 성인용품 라이프스타일,
                 <br className="hidden sm:block" />
                 아카모모만의 특별한 공간 철학을 만나보세요.
