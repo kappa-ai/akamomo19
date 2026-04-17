@@ -30,7 +30,7 @@ export default async function StartupPage() {
 
               <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-6">
                 <span className="text-primary">아카모모</span>와 함께<br />
-                성공적인 가맹을 시작하세요
+                성공적인 창업을 시작하세요
               </h1>
 
               <p className="text-lg text-muted-foreground leading-relaxed mb-8">
