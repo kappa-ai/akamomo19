@@ -30,6 +30,12 @@ export default async function AdminStoresLayout({ children }: { children: React.
         </div>
         <div className="flex flex-wrap items-center gap-2">
           <Link
+            href="/admin/banners"
+            className="text-sm font-medium text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
+          >
+            메인 배너
+          </Link>
+          <Link
             href="/admin/contact"
             className="text-sm font-medium text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
           >

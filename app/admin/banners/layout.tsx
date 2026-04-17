@@ -7,7 +7,7 @@ import { LogoutButton } from "@/components/admin/logout-button"
 import { createServerSupabaseClient } from "@/lib/supabase/server"
 import { isSupabaseConfigured } from "@/lib/stores-db"
 
-export default async function AdminContactLayout({ children }: { children: React.ReactNode }) {
+export default async function AdminBannersLayout({ children }: { children: React.ReactNode }) {
   if (!isSupabaseConfigured()) {
     redirect("/admin/login")
   }
@@ -25,9 +25,9 @@ export default async function AdminContactLayout({ children }: { children: React
     <div className="mx-auto max-w-4xl px-4 py-10 sm:px-6">
       <header className="mb-10 flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">연락처 · 사업자 정보</h1>
+          <h1 className="text-2xl font-bold text-foreground">메인 배너</h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            전화번호, 이메일, 대표자명, 사업자등록번호를 수정하면 푸터·문의 안내에 반영됩니다.
+            홈 히어로 영역에 노출되는 이미지·HTML 배너를 추가·삭제하고 순서를 바꿀 수 있습니다.
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
@@ -38,10 +38,10 @@ export default async function AdminContactLayout({ children }: { children: React
             매장 관리
           </Link>
           <Link
-            href="/admin/banners"
+            href="/admin/contact"
             className="text-sm font-medium text-muted-foreground underline-offset-4 hover:text-foreground hover:underline"
           >
-            메인 배너
+            연락처 · 사업자 정보
           </Link>
           <LogoutButton />
           <Link
