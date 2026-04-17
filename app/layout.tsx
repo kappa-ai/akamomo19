@@ -9,11 +9,30 @@ const notoSansKR = Noto_Sans_KR({
   variable: '--font-noto-sans-kr'
 });
 
+const SITE_URL = 'https://app.akamomopartners.com'
+
+const title =
+  '아카모모 파트너스 | 초기비용 부담 없는 무인 성인용품 창업'
+
+const description = `무인 성인용품 창업을 고민 중이신가요?
+아카모모 파트너스에서 소자본으로 시작 가능한 무인 매장 창업을 안내드립니다.
+창업 상담 및 파트너 문의를 지금 바로 확인해보세요.`
+
 export const metadata: Metadata = {
-  title: '아카모모 | 무인 성인용품 프랜차이즈',
-  description: '아카모모는 누구나 부담 없이 성인용품을 경험할 수 있도록 만든 라이프스타일 브랜드입니다. 밝고 친근한 공간에서 새로운 가맹의 기회를 만나보세요.',
-  generator: 'v0.app',
-  keywords: ['아카모모', '성인용품', '무인매장', '프랜차이즈', '가맹', '부업'],
+  metadataBase: new URL(SITE_URL),
+  title,
+  description,
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title,
+    description,
+    url: SITE_URL,
+    siteName: '아카모모 파트너스',
+    type: 'website',
+    images: [{ url: '/og-image.png' }],
+  },
   icons: {
     icon: [
       {
