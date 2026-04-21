@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react"
 import { createBrowserClient } from "@supabase/ssr"
 import type { SiteContactRow } from "@/lib/site-contact"
-import { SITE_CONTACT_DEFAULTS } from "@/lib/site-contact"
+import { SITE_CONTACT_DEFAULTS, PAGE_TITLE_DEFAULTS } from "@/lib/site-contact"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -36,6 +36,10 @@ export function AdminSiteContactManager() {
         contact_email: SITE_CONTACT_DEFAULTS.contact_email,
         ceo_name: SITE_CONTACT_DEFAULTS.ceo_name,
         business_reg_no: SITE_CONTACT_DEFAULTS.business_reg_no,
+        page_title_home: PAGE_TITLE_DEFAULTS.page_title_home,
+        page_title_stores: PAGE_TITLE_DEFAULTS.page_title_stores,
+        page_title_startup: PAGE_TITLE_DEFAULTS.page_title_startup,
+        page_title_inquiry: PAGE_TITLE_DEFAULTS.page_title_inquiry,
         updated_at: new Date().toISOString(),
       })
     } else {
@@ -58,10 +62,19 @@ export function AdminSiteContactManager() {
       contact_email: row.contact_email.trim(),
       ceo_name: row.ceo_name.trim(),
       business_reg_no: row.business_reg_no.trim(),
+      page_title_home: row.page_title_home.trim(),
+      page_title_stores: row.page_title_stores.trim(),
+      page_title_startup: row.page_title_startup.trim(),
+      page_title_inquiry: row.page_title_inquiry.trim(),
       updated_at: new Date().toISOString(),
     }
     if (!payload.phone || !payload.contact_email || !payload.ceo_name || !payload.business_reg_no) {
-      setError("모든 항목을 입력해 주세요.")
+      setError("연락처 항목을 모두 입력해 주세요.")
+      setSaving(false)
+      return
+    }
+    if (!payload.page_title_home || !payload.page_title_stores || !payload.page_title_startup || !payload.page_title_inquiry) {
+      setError("페이지 제목 항목을 모두 입력해 주세요.")
       setSaving(false)
       return
     }
@@ -87,11 +100,59 @@ export function AdminSiteContactManager() {
         </p>
       )}
 
+      {/* 페이지 제목 관리 */}
       <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+        <h2 className="mb-1 text-base font-semibold text-foreground">페이지 탭 제목</h2>
         <p className="mb-6 text-sm text-muted-foreground">
-          푸터·가맹 문의 등 사이트에 노출되는 전화번호, 이메일, 대표자명, 사업자등록번호입니다. 마이그레이션{" "}
-          <code className="rounded bg-muted px-1 py-0.5 text-xs">003_site_contact.sql</code> 적용 후 저장할 수
-          있습니다.
+          브라우저 탭과 검색 결과에 표시되는 각 페이지의 제목입니다.{" "}
+          마이그레이션 <code className="rounded bg-muted px-1 py-0.5 text-xs">005_page_titles.sql</code> 적용 후 저장할 수 있습니다.
+        </p>
+
+        <div className="grid gap-6">
+          <div className="space-y-2">
+            <Label htmlFor="page_title_home">홈 페이지</Label>
+            <Input
+              id="page_title_home"
+              value={row.page_title_home ?? ""}
+              onChange={(e) => setRow({ ...row, page_title_home: e.target.value })}
+              placeholder={PAGE_TITLE_DEFAULTS.page_title_home}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="page_title_stores">매장 찾기 페이지</Label>
+            <Input
+              id="page_title_stores"
+              value={row.page_title_stores ?? ""}
+              onChange={(e) => setRow({ ...row, page_title_stores: e.target.value })}
+              placeholder={PAGE_TITLE_DEFAULTS.page_title_stores}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="page_title_startup">창업 안내 페이지</Label>
+            <Input
+              id="page_title_startup"
+              value={row.page_title_startup ?? ""}
+              onChange={(e) => setRow({ ...row, page_title_startup: e.target.value })}
+              placeholder={PAGE_TITLE_DEFAULTS.page_title_startup}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="page_title_inquiry">문의하기 페이지</Label>
+            <Input
+              id="page_title_inquiry"
+              value={row.page_title_inquiry ?? ""}
+              onChange={(e) => setRow({ ...row, page_title_inquiry: e.target.value })}
+              placeholder={PAGE_TITLE_DEFAULTS.page_title_inquiry}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* 연락처 · 사업자 정보 */}
+      <div className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+        <h2 className="mb-1 text-base font-semibold text-foreground">연락처 · 사업자 정보</h2>
+        <p className="mb-6 text-sm text-muted-foreground">
+          푸터·가맹 문의 등 사이트에 노출되는 전화번호, 이메일, 대표자명, 사업자등록번호입니다.
         </p>
 
         <div className="grid gap-6 sm:grid-cols-2">
@@ -135,12 +196,12 @@ export function AdminSiteContactManager() {
             />
           </div>
         </div>
+      </div>
 
-        <div className="mt-8 flex flex-wrap gap-3">
-          <Button type="button" onClick={() => void save()} disabled={saving}>
-            {saving ? "저장 중…" : "저장"}
-          </Button>
-        </div>
+      <div className="flex flex-wrap gap-3">
+        <Button type="button" onClick={() => void save()} disabled={saving}>
+          {saving ? "저장 중…" : "저장"}
+        </Button>
       </div>
     </div>
   )

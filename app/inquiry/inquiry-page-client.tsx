@@ -1,7 +1,7 @@
 "use client"
 
-import { Header } from "@/components/layout/header"
-import { Footer } from "@/components/layout/footer"
+import { HeaderClient } from "@/components/layout/header-client"
+import { FooterClient } from "@/components/layout/footer-client"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -14,14 +14,14 @@ import { telHref } from "@/lib/site-contact"
 
 const faqs = [
   {
-    question: "가맹 경험이 없어도 가능한가요?",
+    question: "창업 경험이 없어도 가능한가요?",
     answer:
-      "네, 가능합니다! 아카모모는 가맹 초보자도 쉽게 운영할 수 있는 시스템을 갖추고 있습니다. 본사에서 체계적인 교육과 지속적인 운영 지원을 제공하므로 경험이 없어도 안심하고 시작하실 수 있습니다.",
+      "네, 가능합니다! 아카모모는 초보 창업자도 쉽게 운영할 수 있는 시스템을 갖추고 있습니다. 본사에서 체계적인 교육과 지속적인 운영 지원을 제공하므로 경험이 없어도 안심하고 시작하실 수 있습니다.",
   },
   {
     question: "부업으로 운영해도 괜찮을까요?",
     answer:
-      "아카모모는 부업형 가맹에 최적화되어 있습니다. 주 1회 정도의 매장 관리로 운영이 가능하며, 무인 운영 시스템을 통해 본업과 병행하실 수 있습니다.",
+      "아카모모는 부업형 창업에 최적화되어 있습니다. 주 1회 정도의 매장 관리로 운영이 가능하며, 무인 운영 시스템을 통해 본업과 병행하실 수 있습니다.",
   },
   {
     question: "로열티나 관리비가 있나요?",
@@ -61,13 +61,19 @@ const regions = [
 
 const timings = ["1개월 이내", "3개월 이내", "6개월 이내", "1년 이내", "아직 미정"]
 
-export function InquiryPageClient({ contact }: { contact: SiteContact }) {
+export function InquiryPageClient({
+  contact,
+  showStoresNav,
+}: {
+  contact: SiteContact
+  showStoresNav: boolean
+}) {
   const [openFaq, setOpenFaq] = useState<number | null>(0)
   const phoneHref = telHref(contact.phone)
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <HeaderClient showStoresNav={showStoresNav} />
       <main>
         <RevealSection
           mode="enter"
@@ -269,7 +275,7 @@ export function InquiryPageClient({ contact }: { contact: SiteContact }) {
           </div>
         </RevealSection>
       </main>
-      <Footer contact={contact} />
+      <FooterClient contact={contact} showStoresNav={showStoresNav} />
     </div>
   )
 }

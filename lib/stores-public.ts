@@ -1,3 +1,4 @@
+import { cache } from "react"
 import { createServerSupabaseClient } from "@/lib/supabase/server"
 import type { StoreRow, UpcomingStoreRow } from "@/lib/stores-db"
 import { isSupabaseConfigured } from "@/lib/stores-db"
@@ -57,7 +58,7 @@ function demoAsRows(): StoresPublicResult {
   return { operating, upcoming, source: "demo" }
 }
 
-export async function getStoresPublic(): Promise<StoresPublicResult> {
+export const getStoresPublic = cache(async function getStoresPublic(): Promise<StoresPublicResult> {
   if (!isSupabaseConfigured()) {
     return demoAsRows()
   }
@@ -81,4 +82,13 @@ export async function getStoresPublic(): Promise<StoresPublicResult> {
   } catch {
     return demoAsRows()
   }
+})
+
+/** 헤더·푸터 매장 메뉴: Supabase 연동 + 실제 행이 있을 때만 true. 데모/미연동이면 true(로컬에서 메뉴 유지). */
+export async function hasStoresForPublicNav(): Promise<boolean> {
+  const data = await getStoresPublic()
+  if (data.source !== "supabase") {
+    return true
+  }
+  return data.operating.length > 0 || data.upcoming.length > 0
 }

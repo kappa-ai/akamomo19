@@ -1,3 +1,4 @@
+import type { Metadata } from "next"
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
 import { FranchiseProcess } from "@/components/home/franchise-process"
@@ -7,7 +8,13 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { RevealSection } from "@/components/motion/reveal"
 import { getSiteContact } from "@/lib/get-site-contact"
+import { getPageTitles } from "@/lib/get-page-titles"
 import { telHref } from "@/lib/site-contact"
+
+export async function generateMetadata(): Promise<Metadata> {
+  const titles = await getPageTitles()
+  return { title: titles.page_title_startup }
+}
 
 export default async function StartupPage() {
   const contact = await getSiteContact()
@@ -36,7 +43,7 @@ export default async function StartupPage() {
               <p className="text-lg text-muted-foreground leading-relaxed mb-8">
                 체계적인 지원 시스템과 검증된 비즈니스 모델로
                 <br />
-                가맹 초보자도 안심하고 시작할 수 있습니다.
+                초보 창업자도 안심하고 시작할 수 있습니다.
               </p>
 
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

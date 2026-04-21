@@ -49,7 +49,7 @@ export function FranchiseProcess() {
             가맹 <span className="text-primary">절차</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            체계적인 프로세스로 가맹 초보자도 쉽게 시작할 수 있습니다
+            체계적인 프로세스로 초보 창업자도 쉽게 시작할 수 있습니다
           </p>
         </div>
 

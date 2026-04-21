@@ -1,9 +1,11 @@
+import type { Metadata } from "next"
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
 import { StorePhoto, StoreGalleryBand } from "@/components/store/store-media"
 import { STORE_PHOTOS_GALLERY_ORDER, storePhotoSlots } from "@/lib/store-photos"
 import { getStoresPublic } from "@/lib/stores-public"
 import { getSiteContact } from "@/lib/get-site-contact"
+import { getPageTitles } from "@/lib/get-page-titles"
 import type { StoreRow, UpcomingStoreRow } from "@/lib/stores-db"
 import { MapPin, Clock, Phone, Navigation, ChevronRight, TrendingUp } from "lucide-react"
 import Link from "next/link"
@@ -11,6 +13,11 @@ import { Button } from "@/components/ui/button"
 import { RevealSection } from "@/components/motion/reveal"
 
 export const dynamic = "force-dynamic"
+
+export async function generateMetadata(): Promise<Metadata> {
+  const titles = await getPageTitles()
+  return { title: titles.page_title_stores }
+}
 
 const regions = [
   { name: "서울/경기", count: 15, available: true },
