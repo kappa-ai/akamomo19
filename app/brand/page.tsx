@@ -5,8 +5,6 @@ import { Differentiation } from "@/components/home/differentiation"
 import { TargetAudience } from "@/components/home/target-audience"
 import { SideJobOperation } from "@/components/brand/side-job-operation"
 import { HeadquartersSupport } from "@/components/brand/headquarters-support"
-import { StorePhotoRow } from "@/components/store/store-media"
-import { storePhotoSlots } from "@/lib/store-photos"
 import { Heart } from "lucide-react"
 import { RevealSection } from "@/components/motion/reveal"
 import { getSiteContact } from "@/lib/get-site-contact"
@@ -43,20 +41,6 @@ export default async function BrandPage() {
         </RevealSection>
 
         <BrandSummary />
-
-        <RevealSection className="py-14 md:py-16 bg-background border-y border-border/40">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-10 md:mb-12">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4">
-                실제 <span className="text-primary">매장 공간</span>
-              </h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                밝고 친근한 라이프스타일 매장의 분위기를 사진으로 만나보세요.
-              </p>
-            </div>
-            <StorePhotoRow images={storePhotoSlots.brandDifferentiationTrio} obscured />
-          </div>
-        </RevealSection>
 
         <Differentiation />
         <SideJobOperation />
