@@ -46,12 +46,9 @@ export default async function WholesalePage() {
       <Header />
       <main>
         <RevealSection mode="enter" className="relative py-20 bg-gradient-to-b from-peach-lighter to-background overflow-hidden">
-          <div className="absolute top-10 right-10 w-40 h-40 bg-blush/20 rounded-full blur-3xl" />
-          <div className="absolute bottom-10 left-10 w-32 h-32 bg-lavender/30 rounded-full blur-2xl" />
-
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-3xl text-center">
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-peach-light bg-white/80 px-4 py-2 backdrop-blur-sm">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-peach-light bg-white px-4 py-2">
                 <ShoppingBag className="h-4 w-4 text-primary" />
                 <span className="text-sm font-medium text-foreground">전용 도매몰</span>
               </div>
@@ -67,15 +64,9 @@ export default async function WholesalePage() {
                 검증된 상품을 경쟁력 있는 가격에 만나보세요.
               </p>
 
-              <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-                <Button asChild className="rounded-full bg-primary px-8 hover:bg-coral text-white">
+              <div className="flex justify-center">
+                <Button asChild className="rounded-full bg-primary px-8 text-white hover:bg-coral">
                   <Link href="/inquiry">가맹 문의하기</Link>
-                </Button>
-                <Button asChild variant="outline" className="rounded-full border-peach-light hover:bg-peach-lighter">
-                  <a href="https://b2b.akamomopartners.com/" target="_blank" rel="noopener noreferrer">
-                    도매몰 둘러보기
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </a>
                 </Button>
               </div>
             </div>

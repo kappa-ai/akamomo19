@@ -1,7 +1,9 @@
 "use client"
 
-import { motion, useReducedMotion } from "framer-motion"
+import { m, useReducedMotion } from "framer-motion"
 import type { ComponentPropsWithoutRef } from "react"
+
+import { cn } from "@/lib/utils"
 
 export type RevealSectionProps = ComponentPropsWithoutRef<"section"> & {
   /** enter: 첫 화면 히어로용(마운트 시 1회). scroll: 뷰포트 진입 시(기본). */
@@ -9,6 +11,9 @@ export type RevealSectionProps = ComponentPropsWithoutRef<"section"> & {
 }
 
 const ease = [0.22, 1, 0.36, 1] as const
+
+/** 스크롤 모드: translate 없이 opacity만으로 레이어·합성 부담 최소화 */
+const scrollViewport = { once: true, amount: 0.1, margin: "0px 0px -6% 0px" } as const
 
 export function RevealSection({ className, children, mode = "scroll", ...rest }: RevealSectionProps) {
   const reduce = useReducedMotion()
@@ -23,28 +28,28 @@ export function RevealSection({ className, children, mode = "scroll", ...rest }:
 
   if (mode === "enter") {
     return (
-      <motion.section
-        className={className}
-        initial={{ opacity: 0, y: 40 }}
+      <m.section
+        className={cn("transform-gpu", className)}
+        initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.75, ease }}
+        transition={{ duration: 1.05, ease }}
         {...rest}
       >
         {children}
-      </motion.section>
+      </m.section>
     )
   }
 
   return (
-    <motion.section
-      className={className}
-      initial={{ opacity: 0, y: 56 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.06, margin: "0px 0px -12% 0px" }}
-      transition={{ duration: 0.72, ease }}
+    <m.section
+      className={cn("transform-gpu", className)}
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={scrollViewport}
+      transition={{ duration: 0.8, ease }}
       {...rest}
     >
       {children}
-    </motion.section>
+    </m.section>
   )
 }

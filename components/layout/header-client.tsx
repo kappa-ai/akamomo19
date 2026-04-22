@@ -28,7 +28,7 @@ export function HeaderClient({ showStoresNav = true }: HeaderClientProps) {
   const navigation = buildNavigation(showStoresNav)
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-white/95 backdrop-blur-sm">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center">

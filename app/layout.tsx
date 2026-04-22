@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Noto_Sans_KR } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { MotionProviders } from '@/components/motion/motion-providers'
 import './globals.css'
 
 const notoSansKR = Noto_Sans_KR({ 
@@ -48,7 +49,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`${notoSansKR.variable} font-sans antialiased`}>
-        {children}
+        <MotionProviders>{children}</MotionProviders>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>

@@ -17,7 +17,7 @@ const AUTOPLAY_MS = 6000
 function HeroMarketingFallback() {
   return (
     <div className="mx-auto w-full max-w-4xl text-center">
-      <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-peach-light bg-white/80 px-4 py-2 shadow-sm backdrop-blur-sm">
+      <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-peach-light bg-white px-4 py-2 shadow-sm">
         <Sparkles className="h-4 w-4 text-coral" />
         <span className="text-sm font-medium text-foreground">새로운 형태의 성인용품 창업</span>
       </div>
@@ -120,7 +120,7 @@ export function HomeBannerCarousel({ banners, fillViewport = false }: Props) {
     <div className={cn("relative w-full", fillViewport && "flex min-h-0 flex-1 flex-col")}>
       <Carousel
         setApi={setApi}
-        opts={{ align: "start", loop }}
+        opts={{ align: "start", loop, containScroll: "trimSnaps" }}
         className={cn("w-full", fillViewport && "flex min-h-0 flex-1 flex-col")}
       >
         <CarouselContent className={cn("-ml-0", fillViewport && "min-h-0 flex-1")}>
@@ -146,7 +146,7 @@ export function HomeBannerCarousel({ banners, fillViewport = false }: Props) {
               aria-selected={i === selected}
               aria-label={`배너 ${i + 1}`}
               className={cn(
-                "h-2.5 rounded-full transition-all",
+                "h-2.5 rounded-full transition-[width,background-color] duration-200 ease-out",
                 i === selected ? "w-8 bg-primary" : "w-2.5 bg-foreground/25 hover:bg-foreground/40",
               )}
               onClick={() => api?.scrollTo(i)}

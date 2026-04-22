@@ -22,12 +22,9 @@ export default async function BrandPage() {
           aria-label="브랜드 소개 히어로"
           className="relative flex min-h-[calc(100svh-4rem)] flex-col overflow-hidden bg-gradient-to-b from-peach-lighter to-background"
         >
-          <div className="absolute top-10 right-10 h-40 w-40 rounded-full bg-blush/20 blur-3xl" />
-          <div className="absolute bottom-10 left-10 h-32 w-32 rounded-full bg-lavender/30 blur-2xl" />
-
           <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-4 pb-28 pt-10 sm:px-6 sm:pb-32 sm:pt-12 lg:px-8 lg:pb-36">
             <div className="mx-auto flex w-full max-w-3xl flex-col items-center text-center">
-              <div className="mb-6 inline-flex items-center justify-center gap-2 rounded-full border border-peach-light bg-white/80 px-4 py-2 shadow-sm backdrop-blur-sm">
+              <div className="mb-6 inline-flex items-center justify-center gap-2 rounded-full border border-peach-light bg-white px-4 py-2 shadow-sm">
                 <Heart className="h-4 w-4 shrink-0 text-primary" />
                 <span className="text-sm font-medium text-foreground">브랜드 소개</span>
               </div>
@@ -57,7 +54,7 @@ export default async function BrandPage() {
                 밝고 친근한 라이프스타일 매장의 분위기를 사진으로 만나보세요.
               </p>
             </div>
-            <StorePhotoRow images={storePhotoSlots.brandDifferentiationTrio} />
+            <StorePhotoRow images={storePhotoSlots.brandDifferentiationTrio} obscured />
           </div>
         </RevealSection>
 

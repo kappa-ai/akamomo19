@@ -11,12 +11,9 @@ export function InquiryCTA({ contact }: { contact: SiteContact }) {
 
   return (
     <RevealSection className="relative overflow-hidden bg-gradient-to-b from-peach-lighter to-background py-20">
-      <div className="absolute top-10 right-10 h-40 w-40 rounded-full bg-blush/20 blur-3xl" />
-      <div className="absolute bottom-10 left-10 h-32 w-32 rounded-full bg-lavender/30 blur-2xl" />
-
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-peach-light bg-white/80 px-4 py-2 backdrop-blur-sm">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-peach-light bg-white px-4 py-2">
             <MessageCircle className="h-4 w-4 text-primary" />
             <span className="text-sm font-medium text-foreground">가맹 문의</span>
           </div>

@@ -20,6 +20,8 @@ type StorePhotoProps = {
   aspect?: Aspect
   sizes?: string
   priority?: boolean
+  /** 매장 사진 등 심의·플랫폼 정책용 비식별 블러 */
+  obscured?: boolean
 }
 
 export function StorePhoto({
@@ -29,6 +31,7 @@ export function StorePhoto({
   aspect = "landscape",
   sizes = "(max-width: 768px) 100vw, 33vw",
   priority,
+  obscured = false,
 }: StorePhotoProps) {
   return (
     <div
@@ -38,7 +41,17 @@ export function StorePhoto({
         className
       )}
     >
-      <Image src={src} alt={alt} fill className="object-cover object-center" sizes={sizes} priority={priority} />
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        className={cn(
+          "object-cover object-center",
+          obscured && "scale-110 blur-2xl sm:blur-3xl",
+        )}
+        sizes={sizes}
+        priority={priority}
+      />
     </div>
   )
 }
@@ -47,10 +60,11 @@ type StorePhotoRowProps = {
   images: readonly string[]
   className?: string
   aspect?: Aspect
+  obscured?: boolean
 }
 
 /** 가로 2~3장 나란히 (모바일은 세로 스택) */
-export function StorePhotoRow({ images, className, aspect = "landscape" }: StorePhotoRowProps) {
+export function StorePhotoRow({ images, className, aspect = "landscape", obscured = false }: StorePhotoRowProps) {
   const colSizes =
     images.length >= 3 ? "(max-width: 640px) 100vw, 33vw" : "(max-width: 640px) 100vw, 50vw"
   return (
@@ -62,7 +76,14 @@ export function StorePhotoRow({ images, className, aspect = "landscape" }: Store
       )}
     >
       {images.map((src, i) => (
-        <StorePhoto key={`${src}-${i}`} src={src} aspect={aspect} sizes={colSizes} priority={i === 0} />
+        <StorePhoto
+          key={`${src}-${i}`}
+          src={src}
+          aspect={aspect}
+          sizes={colSizes}
+          priority={i === 0}
+          obscured={obscured}
+        />
       ))}
     </div>
   )

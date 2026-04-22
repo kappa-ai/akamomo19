@@ -79,12 +79,9 @@ export function InquiryPageClient({
           mode="enter"
           className="relative py-16 md:py-20 bg-gradient-to-b from-peach-lighter to-background overflow-hidden"
         >
-          <div className="absolute top-10 right-10 w-40 h-40 bg-blush/20 rounded-full blur-3xl" />
-          <div className="absolute bottom-10 left-10 w-32 h-32 bg-lavender/30 rounded-full blur-2xl" />
-
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-3xl text-center">
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-peach-light bg-white/80 px-4 py-2 backdrop-blur-sm">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-peach-light bg-white px-4 py-2">
                 <MessageCircle className="h-4 w-4 text-primary" />
                 <span className="text-sm font-medium text-foreground">가맹 문의</span>
               </div>
