@@ -6,22 +6,22 @@ const costItems = [
   {
     item: "인테리어 및 간판",
     cost: "1,700만원",
-    note: "15평 기준 (지역 및 면적에 따라 변동)\n브랜드 컨셉에 맞는 도면 제공\n직접 공사 가능"
+    note: "15평 기준 (지역 및 면적에 따라 변동)\n브랜드 컨셉에 맞는 도면 제공\n매장 설계\n간판 및 집기 포함"
   },
   {
     item: "출입인증기/키오스크/CCTV",
-    cost: "500만원",
-    note: "직접 구매 및 설치 가능"
+    cost: "400만원",
+    note: "무인 운영 시스템 구축 및 설치\n직접 구매 가능"
   },
   {
     item: "초도물량",
     cost: "1,500만원",
-    note: "오픈 시 필요한 상품 구성"
+    note: "판매 데이터 기반 최적 상품 구성"
   },
   {
-    item: "컨설팅 및 교육비",
+    item: "오픈 지원 컨설팅",
     cost: "300만원",
-    note: "운영 노하우 및 교육 제공"
+    note: "상권 분석\n매장 세팅\n운영 교육\n오픈 후 지속 운영 관리"
   }
 ]
 
@@ -47,7 +47,7 @@ export function StartupCost() {
             가맹 <span className="text-primary">비용</span>
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            합리적이고 투명한 가맹 비용으로 부담없이 시작하세요
+            초보 창업자도 운영 가능하도록, 매장 구축부터 운영까지 전 과정을 지원합니다.
           </p>
         </div>
 
@@ -87,7 +87,7 @@ export function StartupCost() {
               <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                 <div className="text-lg font-semibold text-foreground">총 창업비용</div>
                 <div className="text-center">
-                  <span className="text-3xl md:text-4xl font-bold text-primary">4,000만원</span>
+                  <span className="text-3xl md:text-4xl font-bold text-primary">3,900만원 </span>
                   <span className="text-sm text-muted-foreground ml-2">(VAT 포함)</span>
                 </div>
               </div>
