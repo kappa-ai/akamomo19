@@ -30,13 +30,10 @@ export const STORE_PHOTOS_GALLERY_ORDER: readonly string[] = [
 /**
  * 슬롯 이름 → 사용처
  * - homeHero → `components/home/hero-section.tsx` (메인 배너 배경)
- * - brandDifferentiationTrio → `app/brand/page.tsx`
  * - storesOperatingCard, storesUpcomingCard → `app/stores/page.tsx` (+ 갤러리 `STORE_PHOTOS_GALLERY_ORDER`)
  */
 export const storePhotoSlots = {
   homeHero: ALL_STORE_PHOTOS[3],
-
-  brandDifferentiationTrio: [ALL_STORE_PHOTOS[6], ALL_STORE_PHOTOS[8], ALL_STORE_PHOTOS[7]] as const,
 
   storesOperatingCard: [ALL_STORE_PHOTOS[1], ALL_STORE_PHOTOS[4], ALL_STORE_PHOTOS[6]] as const,
   storesUpcomingCard: [ALL_STORE_PHOTOS[2], ALL_STORE_PHOTOS[3], ALL_STORE_PHOTOS[5]] as const,
