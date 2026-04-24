@@ -1,18 +1,25 @@
--- [선택] SQL로만 관리자 1명을 넣을 때 사용합니다.
--- 운영에서는 docs/SUPABASE_OWNER_HANDOFF.md 처럼 "Add user + admin_users insert" 가 더 단순합니다.
+-- 관리자 계정 1명을 SQL로 생성합니다.
+-- 선행: supabase/migrations/001_stores.sql 을 먼저 실행해 두세요.
 --
--- 선행: supabase/migrations/001_stores.sql 실행 완료.
--- 아래 admin_email, admin_password 만 바꾼 뒤 통째로 실행.
+-- 아래 admin_email, admin_password 만 바꾼 뒤 통째로 실행하세요.
 --
--- 문제 시: Authentication → Users → Add user 로 동일 이메일을 만들고,
---           기존 SQL 사용자·identities 는 삭제한 뒤 admin_users 만 UUID로 insert.
+-- [중요] unexpected_failure / "Database error querying schema" 가 나오면:
+-- auth.users 의 confirmation_token·recovery_token·email_change·email_change_token_new 가 NULL 인 경우가 많습니다.
+-- 이미 만든 사용자는 supabase/sql/fix_auth_user_token_columns.sql 로 고치거나, 토큰 컬럼을 '' 로 UPDATE 하세요.
+--
+-- 로그인 시 400 / invalid_grant 가 나오면:
+-- 호스팅 Supabase(GoTrue)가 bcrypt(crypt) 해시와 맞지 않는 경우가 있습니다.
+-- 그때는 Authentication → Users → Add user 로 같은 이메일·비밀번호로 사용자를 만들고
+-- (Auto Confirm 켜기) 그 사용자 UUID로만 실행:
+--   insert into public.admin_users (user_id) values ('복사한-UUID');
+-- SQL로 만든 auth.users / auth.identities 행은 해당 이메일이면 먼저 삭제하거나 다른 이메일을 쓰세요.
 
 create extension if not exists pgcrypto;
 
 do $$
 declare
-  admin_email text := 'admin@example.com';
-  admin_password text := 'change-me';
+  admin_email text := 'akamomo19@akamomo.com';
+  admin_password text := 'Akamomo19@@';
   new_id uuid := gen_random_uuid();
   enc text;
 begin
@@ -22,6 +29,7 @@ begin
 
   enc := crypt(admin_password, gen_salt('bf'));
 
+  -- confirmation_token 등이 NULL이면 GoTrue가 "Database error querying schema" 를 냅니다. 반드시 '' 로 둡니다.
   insert into auth.users (
     id,
     instance_id,

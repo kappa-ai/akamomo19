@@ -41,7 +41,7 @@ export function HeadquartersSupport() {
             <ul className="text-sm text-muted-foreground space-y-2">
               <li>• 검증된 상품 구성</li>
               <li>• 경쟁력 있는 도매가</li>
-              <li>• 신상품 우선 공급</li>
+              <li>• 다수 도매처 제품 통합</li>
             </ul>
           </div>
 
@@ -51,12 +51,12 @@ export function HeadquartersSupport() {
             </div>
             <h3 className="text-lg font-semibold text-foreground mb-3">마케팅 지원</h3>
             <p className="text-sm text-muted-foreground mb-4">
-              다양한 온라인 채널을 통한 브랜드 홍보와 마케팅 지원을 제공합니다.
+              본사가 다양한 온라인 채널을 통해 브랜드와 가맹점 홍보를 직접 지원합니다.
             </p>
             <ul className="text-sm text-muted-foreground space-y-2">
-              <li>• SNS 마케팅 지원</li>
-              <li>• 블로그 콘텐츠 제공</li>
+              <li>• 브랜드 마케팅 지원</li>
               <li>• 유튜브 홍보 지원</li>
+              <li>• SNS 홍보 지원</li>
             </ul>
           </div>
         </div>
