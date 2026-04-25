@@ -5,7 +5,7 @@ import Image from "next/image"
 import { useState } from "react"
 import { Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { BRAND_LOGO_ALT, BRAND_LOGO_SRC } from "@/lib/brand-logo"
 
 function buildNavigation(showStoresNav: boolean) {
@@ -68,6 +68,10 @@ export function HeaderClient({ showStoresNav = true }: HeaderClientProps) {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-80 bg-cream">
+              <SheetHeader className="sr-only">
+                <SheetTitle>모바일 메뉴</SheetTitle>
+                <SheetDescription>사이트 주요 메뉴와 가맹 문의 링크를 확인할 수 있습니다.</SheetDescription>
+              </SheetHeader>
               <div className="mt-8 flex flex-col gap-6">
                 <Link href="/" onClick={() => setIsOpen(false)}>
                   <Image

@@ -69,7 +69,43 @@ export function InquiryPageClient({
   showStoresNav: boolean
 }) {
   const [openFaq, setOpenFaq] = useState<number | null>(0)
+  const [region, setRegion] = useState("")
+  const [timing, setTiming] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitMessage, setSubmitMessage] = useState<string | null>(null)
+  const [submitError, setSubmitError] = useState<string | null>(null)
   const phoneHref = telHref(contact.phone)
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    setSubmitError(null)
+    setSubmitMessage(null)
+
+    const form = event.currentTarget
+    const formData = new FormData(form)
+
+    setIsSubmitting(true)
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/dugustjr98@gmail.com", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: formData,
+      })
+
+      if (!response.ok) {
+        throw new Error("문의 전송에 실패했습니다. 잠시 후 다시 시도해 주세요.")
+      }
+
+      setSubmitMessage("문의가 정상 접수되었습니다. 빠른 시간 내에 연락드릴게요.")
+      form.reset()
+      setRegion("")
+      setTiming("")
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : "문의 전송에 실패했습니다.")
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -154,20 +190,30 @@ export function InquiryPageClient({
                   아래 양식을 작성해 주시면 빠른 시간 내에 연락드리겠습니다.
                 </p>
 
-                <form className="space-y-6">
+                <form className="space-y-6" onSubmit={handleSubmit}>
+                  <input type="hidden" name="_subject" value="아카모모 가맹문의 접수" />
+                  <input type="hidden" name="_captcha" value="false" />
+                  <input type="hidden" name="희망 지역" value={region || "-"} />
+                  <input type="hidden" name="가맹 예정 시기" value={timing || "-"} />
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-foreground">이름 *</label>
                       <Input
+                        name="이름"
                         placeholder="홍길동"
                         className="rounded-xl border-border focus:border-primary focus:ring-primary"
+                        autoComplete="name"
+                        required
                       />
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-foreground">연락처 *</label>
                       <Input
+                        name="연락처"
                         placeholder="010-0000-0000"
                         className="rounded-xl border-border focus:border-primary focus:ring-primary"
+                        autoComplete="tel"
+                        required
                       />
                     </div>
                   </div>
@@ -175,7 +221,7 @@ export function InquiryPageClient({
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-foreground">희망 지역</label>
-                      <Select>
+                      <Select value={region} onValueChange={setRegion}>
                         <SelectTrigger className="rounded-xl border-border">
                           <SelectValue placeholder="지역을 선택해 주세요" />
                         </SelectTrigger>
@@ -190,7 +236,7 @@ export function InquiryPageClient({
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-foreground">가맹 예정 시기</label>
-                      <Select>
+                      <Select value={timing} onValueChange={setTiming}>
                         <SelectTrigger className="rounded-xl border-border">
                           <SelectValue placeholder="시기를 선택해 주세요" />
                         </SelectTrigger>
@@ -208,6 +254,7 @@ export function InquiryPageClient({
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-foreground">문의 내용</label>
                     <Textarea
+                      name="문의 내용"
                       placeholder="궁금하신 내용을 자유롭게 작성해 주세요."
                       className="rounded-xl border-border focus:border-primary focus:ring-primary min-h-32"
                     />
@@ -216,11 +263,17 @@ export function InquiryPageClient({
                   <div className="pt-4">
                     <Button
                       type="submit"
+                      disabled={isSubmitting}
                       className="w-full rounded-full bg-primary hover:bg-coral text-white py-6 text-lg"
                     >
-                      상담 신청하기
+                      {isSubmitting ? "전송 중..." : "상담 신청하기"}
                     </Button>
                   </div>
+
+                  {submitMessage ? (
+                    <p className="text-sm text-center text-green-600">{submitMessage}</p>
+                  ) : null}
+                  {submitError ? <p className="text-sm text-center text-red-600">{submitError}</p> : null}
 
                   <p className="text-xs text-muted-foreground text-center">
                     상담 신청 시 개인정보 수집 및 이용에 동의하는 것으로 간주됩니다.
