@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Phone, MessageCircle, Clock, ChevronDown, ChevronUp, HelpCircle } from "lucide-react"
+import Link from "next/link"
 import { useState } from "react"
 import { RevealSection } from "@/components/motion/reveal"
 import type { SiteContact } from "@/lib/site-contact"
@@ -74,29 +75,44 @@ export function InquiryPageClient({
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitMessage, setSubmitMessage] = useState<string | null>(null)
   const [submitError, setSubmitError] = useState<string | null>(null)
+  const [boardPath, setBoardPath] = useState<string | null>(null)
   const phoneHref = telHref(contact.phone)
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     setSubmitError(null)
     setSubmitMessage(null)
+    setBoardPath(null)
 
     const form = event.currentTarget
-    const formData = new FormData(form)
+    const name = (form.elements.namedItem("이름") as HTMLInputElement | null)?.value?.trim() ?? ""
+    const phone = (form.elements.namedItem("연락처") as HTMLInputElement | null)?.value?.trim() ?? ""
+    const message = (form.elements.namedItem("문의 내용") as HTMLTextAreaElement | null)?.value?.trim() ?? ""
 
     setIsSubmitting(true)
     try {
-      const response = await fetch("https://formsubmit.co/ajax/akamomo19@naver.com", {
+      const response = await fetch("/api/inquiry", {
         method: "POST",
-        headers: { Accept: "application/json" },
-        body: formData,
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name,
+          phone,
+          region: region || undefined,
+          timing: timing || undefined,
+          message,
+        }),
       })
 
+      const payload = (await response.json()) as { error?: string; boardPath?: string }
+
       if (!response.ok) {
-        throw new Error("문의 전송에 실패했습니다. 잠시 후 다시 시도해 주세요.")
+        throw new Error(payload.error ?? "문의 전송에 실패했습니다. 잠시 후 다시 시도해 주세요.")
       }
 
-      setSubmitMessage("문의가 정상 접수되었습니다. 빠른 시간 내에 연락드릴게요.")
+      if (payload.boardPath) {
+        setBoardPath(payload.boardPath)
+      }
+      setSubmitMessage("문의가 접수되었습니다. 공개 게시판에서 확인·댓글하실 수 있어요.")
       form.reset()
       setRegion("")
       setTiming("")
@@ -186,15 +202,17 @@ export function InquiryPageClient({
                 className="scroll-mt-24 bg-white rounded-3xl p-8 md:p-10 border border-border shadow-sm"
               >
                 <h2 className="text-2xl font-bold text-foreground mb-2">온라인 상담 신청</h2>
-                <p className="text-muted-foreground mb-8">
+                <p className="text-muted-foreground mb-2">
                   아래 양식을 작성해 주시면 빠른 시간 내에 연락드리겠습니다.
+                </p>
+                <p className="mb-8 text-sm text-muted-foreground">
+                  <Link href="/inquiry/board" className="font-medium text-primary underline-offset-4 hover:underline">
+                    공개 가맹 문의 게시판
+                  </Link>
+                  에서 접수 글·댓글을 모두 보실 수 있어요.
                 </p>
 
                 <form className="space-y-6" onSubmit={handleSubmit}>
-                  <input type="hidden" name="_subject" value="아카모모 가맹문의 접수" />
-                  <input type="hidden" name="_captcha" value="false" />
-                  <input type="hidden" name="희망 지역" value={region || "-"} />
-                  <input type="hidden" name="가맹 예정 시기" value={timing || "-"} />
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-foreground">이름 *</label>
@@ -271,7 +289,23 @@ export function InquiryPageClient({
                   </div>
 
                   {submitMessage ? (
-                    <p className="text-sm text-center text-green-600">{submitMessage}</p>
+                    <div className="space-y-3 rounded-xl border border-green-200 bg-green-50/80 p-4 text-center">
+                      <p className="text-sm text-green-800">{submitMessage}</p>
+                      {boardPath ? (
+                        <div className="flex flex-col items-center gap-2 sm:flex-row sm:justify-center">
+                          <Button
+                            asChild
+                            variant="outline"
+                            className="rounded-full border-green-300 text-green-900 hover:bg-green-100"
+                          >
+                            <Link href={boardPath}>방금 올린 글 보기</Link>
+                          </Button>
+                          <Button asChild variant="ghost" size="sm" className="text-green-800">
+                            <Link href="/inquiry/board">전체 게시판</Link>
+                          </Button>
+                        </div>
+                      ) : null}
+                    </div>
                   ) : null}
                   {submitError ? <p className="text-sm text-center text-red-600">{submitError}</p> : null}
 

@@ -41,6 +41,12 @@ export default async function AdminStoresLayout({ children }: { children: React.
           >
             페이지 정보
           </Link>
+          <Link
+            href="/admin/inquiries"
+            className="inline-flex h-8 items-center rounded-md border border-input bg-background px-3 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
+          >
+            가맹 문의
+          </Link>
           <LogoutButton />
           <Link
             href="/stores"
