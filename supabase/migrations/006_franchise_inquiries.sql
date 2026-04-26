@@ -102,3 +102,8 @@ $$;
 
 revoke all on function public.submit_franchise_inquiry (text, text, text, text, text) from public;
 grant execute on function public.submit_franchise_inquiry (text, text, text, text, text) to anon, authenticated;
+
+-- PostgREST(anon·로그인 사용자)가 RLS 통과 후에도 테이블에 접근하려면 GRANT 필요
+grant select on table public.franchise_inquiries to anon, authenticated;
+grant select on table public.franchise_inquiry_messages to anon, authenticated;
+grant insert on table public.franchise_inquiry_messages to anon, authenticated;

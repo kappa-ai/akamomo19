@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
 import Link from "next/link"
-import { notFound } from "next/navigation"
 import { FooterClient } from "@/components/layout/footer-client"
 import { HeaderClient } from "@/components/layout/header-client"
+import { BoardLoadError } from "@/components/inquiry/board-load-error"
 import type { FranchiseInquiryRow } from "@/lib/franchise-inquiry"
 import { getSiteContact } from "@/lib/get-site-contact"
 import { hasStoresForPublicNav } from "@/lib/stores-public"
@@ -23,19 +23,34 @@ function formatKo(dt: string) {
 
 export default async function InquiryBoardListPage() {
   let rows: FranchiseInquiryRow[] = []
+  let loadError: string | null = null
+
   try {
     const supabase = createAnonSupabaseClient()
     const { data, error } = await supabase
       .from("franchise_inquiries")
       .select("*")
       .order("created_at", { ascending: false })
+
     if (error) {
       console.error("franchise_inquiries list", error)
-      notFound()
+      loadError = error.message
+    } else {
+      rows = (data ?? []) as FranchiseInquiryRow[]
     }
-    rows = (data ?? []) as FranchiseInquiryRow[]
-  } catch {
-    notFound()
+  } catch (e) {
+    console.error("InquiryBoardListPage", e)
+    loadError = e instanceof Error ? e.message : "알 수 없는 오류"
+  }
+
+  if (loadError) {
+    return (
+      <BoardLoadError
+        title="가맹 문의 게시판"
+        message="게시판 목록을 불러오지 못했습니다. 아래를 확인한 뒤 다시 시도해 주세요."
+        detail={loadError}
+      />
+    )
   }
 
   const [contact, showStoresNav] = await Promise.all([getSiteContact(), hasStoresForPublicNav()])
