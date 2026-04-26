@@ -86,7 +86,7 @@ export function InquiryPageClient({
 
     setIsSubmitting(true)
     try {
-      const response = await fetch("https://formsubmit.co/ajax/dugustjr98@gmail.com", {
+      const response = await fetch("https://formsubmit.co/ajax/akamomo19@naver.com", {
         method: "POST",
         headers: { Accept: "application/json" },
         body: formData,
