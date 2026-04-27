@@ -16,10 +16,10 @@ import type { FranchiseBoardPublicComment, FranchiseBoardPublicPost } from "@/li
 function CommentLine({ c }: { c: FranchiseBoardPublicComment }) {
   if (c.is_staff) {
     return (
-      <div className="rounded-lg border border-primary/40 bg-primary/5 px-3 py-2 text-sm">
-        <span className="font-bold text-primary">Akamomo</span>
+      <div className="rounded-lg border-2 border-primary/55 bg-gradient-to-br from-primary/25 via-primary/12 to-peach-light/35 px-3 py-2.5 text-sm shadow-sm">
+        <span className="font-extrabold tracking-tight text-primary">Akamomo</span>
         <span className="mx-2 text-muted-foreground">·</span>
-        <span className="whitespace-pre-wrap font-medium text-foreground">{c.body}</span>
+        <span className="whitespace-pre-wrap font-semibold text-foreground">{c.body}</span>
       </div>
     )
   }
@@ -27,7 +27,7 @@ function CommentLine({ c }: { c: FranchiseBoardPublicComment }) {
     <div className="rounded-lg border border-border bg-muted/30 px-3 py-2 text-sm text-muted-foreground">
       <span className="font-medium text-foreground">{c.author_name}</span>
       <span className="mx-2">·</span>
-      <span className="whitespace-pre-wrap">{c.body}</span>
+      <span className="whitespace-pre-wrap font-normal">{c.body}</span>
     </div>
   )
 }

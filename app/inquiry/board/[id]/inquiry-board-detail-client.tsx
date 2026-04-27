@@ -38,9 +38,9 @@ type PublicPost = {
 function CommentBlock({ c }: { c: PublicComment }) {
   if (c.is_staff) {
     return (
-      <div className="rounded-xl border border-primary/40 bg-gradient-to-br from-primary/10 to-peach-lighter/30 px-4 py-3">
-        <p className="text-sm font-bold text-primary">Akamomo</p>
-        <p className="mt-2 whitespace-pre-wrap text-sm font-medium text-foreground">{c.body}</p>
+      <div className="rounded-xl border-2 border-primary/55 bg-gradient-to-br from-primary/25 via-primary/15 to-peach-light/40 px-4 py-3 shadow-sm">
+        <p className="text-base font-extrabold tracking-tight text-primary">Akamomo</p>
+        <p className="mt-2 whitespace-pre-wrap text-sm font-semibold leading-relaxed text-foreground">{c.body}</p>
         <p className="mt-2 text-xs text-muted-foreground">
           {format(new Date(c.created_at), "yyyy.MM.dd HH:mm", { locale: ko })}
         </p>
@@ -50,7 +50,7 @@ function CommentBlock({ c }: { c: PublicComment }) {
   return (
     <div className="rounded-xl border border-border bg-muted/30 px-4 py-3">
       <p className="text-sm font-medium text-foreground">{c.author_name}</p>
-      <p className="mt-2 whitespace-pre-wrap text-sm text-muted-foreground">{c.body}</p>
+      <p className="mt-2 whitespace-pre-wrap text-sm font-normal text-muted-foreground">{c.body}</p>
       <p className="mt-2 text-xs text-muted-foreground">
         {format(new Date(c.created_at), "yyyy.MM.dd HH:mm", { locale: ko })}
       </p>

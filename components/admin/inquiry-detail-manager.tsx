@@ -168,7 +168,7 @@ export function AdminInquiryDetailManager({ inquiryId }: { inquiryId: string }) 
 
       <section className="rounded-xl border border-border bg-card p-6">
         <h2 className="text-lg font-semibold text-foreground">댓글</h2>
-        <p className="mt-1 text-sm text-muted-foreground">본사·문의자 모두 같은 스레드에 표시됩니다.</p>
+        <p className="mt-1 text-sm text-muted-foreground">Akamomo·문의자 모두 같은 스레드에 표시됩니다.</p>
         <div className="mt-4 space-y-3">
           {messages.length === 0 ? (
             <p className="text-sm text-muted-foreground">아직 댓글이 없습니다.</p>
@@ -176,20 +176,38 @@ export function AdminInquiryDetailManager({ inquiryId }: { inquiryId: string }) 
             messages.map((m) => (
               <div
                 key={m.id}
-                className={`rounded-lg border p-4 ${m.is_staff ? "border-primary/30 bg-primary/5" : "border-border bg-muted/20"}`}
+                className={`rounded-lg border p-4 ${
+                  m.is_staff
+                    ? "border-primary/55 bg-gradient-to-br from-primary/25 via-primary/15 to-peach-light/35 shadow-sm"
+                    : "border-border bg-muted/25"
+                }`}
               >
                 <div className="flex justify-between gap-2 text-xs text-muted-foreground">
-                  <span className="font-medium text-foreground">{m.is_staff ? "본사" : "문의자"}</span>
+                  <span
+                    className={
+                      m.is_staff
+                        ? "text-sm font-extrabold tracking-tight text-primary"
+                        : "font-medium text-foreground"
+                    }
+                  >
+                    {m.is_staff ? "Akamomo" : "문의자"}
+                  </span>
                   <span>{formatKo(m.created_at)}</span>
                 </div>
-                <p className="mt-2 whitespace-pre-wrap text-sm text-foreground">{m.body}</p>
+                <p
+                  className={`mt-2 whitespace-pre-wrap text-sm leading-relaxed ${
+                    m.is_staff ? "font-semibold text-foreground" : "text-foreground"
+                  }`}
+                >
+                  {m.body}
+                </p>
               </div>
             ))
           )}
         </div>
 
         <form onSubmit={sendReply} className="mt-6 space-y-3 border-t border-border pt-6">
-          <Label htmlFor="admin-reply">본사 댓글</Label>
+          <Label htmlFor="admin-reply">Akamomo 답글</Label>
           <Textarea
             id="admin-reply"
             value={reply}
