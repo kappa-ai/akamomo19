@@ -3,11 +3,14 @@
 import { HeaderClient } from "@/components/layout/header-client"
 import { FooterClient } from "@/components/layout/footer-client"
 import { Button } from "@/components/ui/button"
+import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Phone, MessageCircle, Clock, ChevronDown, ChevronUp, HelpCircle, ClipboardList } from "lucide-react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { RevealSection } from "@/components/motion/reveal"
 import type { SiteContact } from "@/lib/site-contact"
@@ -69,8 +72,54 @@ export function InquiryPageClient({
   contact: SiteContact
   showStoresNav: boolean
 }) {
+  const router = useRouter()
   const [openFaq, setOpenFaq] = useState<number | null>(0)
   const phoneHref = telHref(contact.phone)
+
+  const [name, setName] = useState("")
+  const [phone, setPhone] = useState("")
+  const [region, setRegion] = useState("__empty__")
+  const [timing, setTiming] = useState("__empty__")
+  const [message, setMessage] = useState("")
+  const [isSecret, setIsSecret] = useState(false)
+  const [password, setPassword] = useState("")
+  const [passwordConfirm, setPasswordConfirm] = useState("")
+  const [submitting, setSubmitting] = useState(false)
+  const [formError, setFormError] = useState<string | null>(null)
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    setFormError(null)
+    setSubmitting(true)
+    try {
+      const res = await fetch("/api/inquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name,
+          phone,
+          region: region === "__empty__" ? undefined : region,
+          timing: timing === "__empty__" ? undefined : timing,
+          message,
+          is_secret: isSecret,
+          password: isSecret ? password : null,
+          password_confirm: isSecret ? passwordConfirm : null,
+        }),
+      })
+      const j = (await res.json().catch(() => ({}))) as { error?: string; boardPath?: string }
+      if (!res.ok) {
+        setFormError(j.error ?? "접수에 실패했습니다.")
+        return
+      }
+      if (j.boardPath) {
+        router.push(j.boardPath)
+        return
+      }
+      router.push("/inquiry/board")
+    } finally {
+      setSubmitting(false)
+    }
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -139,7 +188,7 @@ export function InquiryPageClient({
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">문의게시판</p>
-                  <p className="text-lg font-bold text-foreground">글·댓글로 문의하기</p>
+                  <p className="text-lg font-bold text-foreground">상담 신청 내역·댓글 보기</p>
                 </div>
               </Link>
 
@@ -165,22 +214,31 @@ export function InquiryPageClient({
               >
                 <h2 className="text-2xl font-bold text-foreground mb-2">온라인 상담 신청</h2>
                 <p className="text-muted-foreground mb-8">
-                  아래 양식을 작성해 주시면 빠른 시간 내에 연락드리겠습니다.
+                  접수하신 내용은 문의게시판에 표시됩니다. 비밀글로 접수하면 이름·연락처·문의 내용은 비밀번호로만 확인할 수
+                  있습니다.
                 </p>
 
-                <form className="space-y-6">
+                <form className="space-y-6" onSubmit={handleSubmit}>
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-foreground">이름 *</label>
                       <Input
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                         placeholder="홍길동"
+                        required
+                        maxLength={100}
                         className="rounded-xl border-border focus:border-primary focus:ring-primary"
                       />
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-foreground">연락처 *</label>
                       <Input
+                        value={phone}
+                        onChange={(e) => setPhone(e.target.value)}
                         placeholder="010-0000-0000"
+                        required
+                        maxLength={40}
                         className="rounded-xl border-border focus:border-primary focus:ring-primary"
                       />
                     </div>
@@ -189,14 +247,15 @@ export function InquiryPageClient({
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-foreground">희망 지역</label>
-                      <Select>
+                      <Select value={region} onValueChange={setRegion}>
                         <SelectTrigger className="rounded-xl border-border">
                           <SelectValue placeholder="지역을 선택해 주세요" />
                         </SelectTrigger>
                         <SelectContent>
-                          {regions.map((region) => (
-                            <SelectItem key={region} value={region}>
-                              {region}
+                          <SelectItem value="__empty__">선택 안 함</SelectItem>
+                          {regions.map((r) => (
+                            <SelectItem key={r} value={r}>
+                              {r}
                             </SelectItem>
                           ))}
                         </SelectContent>
@@ -204,14 +263,15 @@ export function InquiryPageClient({
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-foreground">가맹 예정 시기</label>
-                      <Select>
+                      <Select value={timing} onValueChange={setTiming}>
                         <SelectTrigger className="rounded-xl border-border">
                           <SelectValue placeholder="시기를 선택해 주세요" />
                         </SelectTrigger>
                         <SelectContent>
-                          {timings.map((timing) => (
-                            <SelectItem key={timing} value={timing}>
-                              {timing}
+                          <SelectItem value="__empty__">선택 안 함</SelectItem>
+                          {timings.map((t) => (
+                            <SelectItem key={t} value={t}>
+                              {t}
                             </SelectItem>
                           ))}
                         </SelectContent>
@@ -222,17 +282,67 @@ export function InquiryPageClient({
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-foreground">문의 내용</label>
                     <Textarea
+                      value={message}
+                      onChange={(e) => setMessage(e.target.value)}
                       placeholder="궁금하신 내용을 자유롭게 작성해 주세요."
+                      maxLength={8000}
                       className="rounded-xl border-border focus:border-primary focus:ring-primary min-h-32"
                     />
                   </div>
 
+                  <div className="space-y-4 rounded-xl border border-border bg-muted/20 p-4">
+                    <div className="flex items-start gap-2">
+                      <Checkbox
+                        id="apply-secret"
+                        checked={isSecret}
+                        onCheckedChange={(v) => setIsSecret(v === true)}
+                      />
+                      <div>
+                        <Label htmlFor="apply-secret" className="cursor-pointer text-sm font-medium leading-tight">
+                          비밀글로 접수
+                        </Label>
+                        <p className="mt-1 text-xs text-muted-foreground">
+                          문의게시판에서 이름·연락처·내용은 아래 비밀번호를 입력한 경우에만 보입니다.
+                        </p>
+                      </div>
+                    </div>
+                    {isSecret ? (
+                      <div className="grid gap-4 sm:grid-cols-2">
+                        <div className="space-y-2">
+                          <Label htmlFor="apply-pw">비밀번호 (4자 이상)</Label>
+                          <Input
+                            id="apply-pw"
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            autoComplete="new-password"
+                            className="rounded-xl"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <Label htmlFor="apply-pw2">비밀번호 확인</Label>
+                          <Input
+                            id="apply-pw2"
+                            type="password"
+                            value={passwordConfirm}
+                            onChange={(e) => setPasswordConfirm(e.target.value)}
+                            autoComplete="new-password"
+                            className="rounded-xl"
+                          />
+                        </div>
+                      </div>
+                    ) : null}
+                  </div>
+
+                  {formError ? <p className="text-sm text-destructive">{formError}</p> : null}
+
                   <div className="pt-4">
                     <Button
                       type="submit"
+                      disabled={submitting}
                       className="w-full rounded-full bg-primary hover:bg-coral text-white py-6 text-lg"
                     >
-                      상담 신청하기
+                      {submitting ? "접수 중…" : "상담 신청하기"}
                     </Button>
                   </div>
 

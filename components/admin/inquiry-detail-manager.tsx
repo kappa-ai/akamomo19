@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useCallback, useEffect, useState } from "react"
 import { createBrowserClient } from "@supabase/ssr"
 import type { FranchiseInquiryMessageRow, FranchiseInquiryRow } from "@/lib/franchise-inquiry"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
@@ -124,7 +125,14 @@ export function AdminInquiryDetailManager({ inquiryId }: { inquiryId: string }) 
       ) : null}
 
       <section className="rounded-xl border border-border bg-card p-6">
-        <h2 className="text-lg font-semibold text-foreground">접수 정보</h2>
+        <div className="flex flex-wrap items-center gap-2">
+          <h2 className="text-lg font-semibold text-foreground">접수 정보</h2>
+          {inquiry.is_secret ? (
+            <Badge variant="secondary" className="text-xs">
+              비밀글
+            </Badge>
+          ) : null}
+        </div>
         <p className="mt-1 text-xs text-muted-foreground">{formatKo(inquiry.created_at)}</p>
         <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
           <div>

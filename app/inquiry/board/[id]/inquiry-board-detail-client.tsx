@@ -74,13 +74,12 @@ export function InquiryBoardDetailClient({
   const [unlocking, setUnlocking] = useState(false)
 
   const [cBody, setCBody] = useState("")
-  const [cAuthor, setCAuthor] = useState("")
   const [cSubmitting, setCSubmitting] = useState(false)
   const [cError, setCError] = useState<string | null>(null)
 
   const load = useCallback(async () => {
     setError(null)
-    const res = await fetch(`/api/inquiry-board/posts/${id}`, { credentials: "same-origin" })
+    const res = await fetch(`/api/franchise-board/inquiries/${id}`, { credentials: "same-origin" })
     if (!res.ok) {
       const j = (await res.json().catch(() => ({}))) as { error?: string }
       setError(j.error ?? "불러오지 못했습니다.")
@@ -100,7 +99,7 @@ export function InquiryBoardDetailClient({
     setUnlockError(null)
     setUnlocking(true)
     try {
-      const res = await fetch(`/api/inquiry-board/posts/${id}/unlock`, {
+      const res = await fetch(`/api/franchise-board/inquiries/${id}/unlock`, {
         method: "POST",
         credentials: "same-origin",
         headers: { "Content-Type": "application/json" },
@@ -123,11 +122,11 @@ export function InquiryBoardDetailClient({
     setCError(null)
     setCSubmitting(true)
     try {
-      const res = await fetch(`/api/inquiry-board/posts/${id}/comments`, {
+      const res = await fetch(`/api/franchise-board/inquiries/${id}/comments`, {
         method: "POST",
         credentials: "same-origin",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ body: cBody, author_name: cAuthor }),
+        body: JSON.stringify({ body: cBody }),
       })
       const j = (await res.json().catch(() => ({}))) as { error?: string }
       if (!res.ok) {
@@ -222,19 +221,6 @@ export function InquiryBoardDetailClient({
 
                     <form onSubmit={submitComment} className="mt-6 space-y-4 rounded-2xl border border-border bg-muted/20 p-6">
                       <h3 className="text-sm font-medium text-foreground">댓글 작성</h3>
-                      <div className="grid gap-4 sm:grid-cols-2">
-                        <div className="space-y-2">
-                          <Label htmlFor="c-author">작성자</Label>
-                          <Input
-                            id="c-author"
-                            value={cAuthor}
-                            onChange={(e) => setCAuthor(e.target.value)}
-                            required
-                            maxLength={80}
-                            className="rounded-xl"
-                          />
-                        </div>
-                      </div>
                       <div className="space-y-2">
                         <Label htmlFor="c-body">내용</Label>
                         <Textarea

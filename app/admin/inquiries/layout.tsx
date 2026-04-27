@@ -27,7 +27,7 @@ export default async function AdminInquiriesLayout({ children }: { children: Rea
         <div>
           <h1 className="text-2xl font-bold text-foreground">가맹 문의</h1>
           <p className="mt-1 text-sm text-muted-foreground">
-            관리자용 목록·상세입니다. 사이트 공개 게시판(/inquiry/board)과 같은 데이터입니다.
+            온라인 상담 신청 접수 목록·상세입니다. 공개 문의게시판(/inquiry/board)과 동일한 데이터입니다.
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2">

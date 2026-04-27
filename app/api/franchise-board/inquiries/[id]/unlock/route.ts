@@ -1,13 +1,12 @@
 import { NextResponse } from "next/server"
 import { z } from "zod"
-import { createServiceSupabaseClient, isSupabaseServiceRoleConfigured } from "@/lib/supabase/service"
 import {
   INQUIRY_BOARD_UNLOCK_COOKIE,
   getBoardCookieSigningSecret,
   withUnlock,
 } from "@/lib/inquiry-board-unlock-cookie"
 import { verifyPostPassword } from "@/lib/inquiry-board-password"
-import type { InquiryBoardPostRow } from "@/lib/inquiry-board-types"
+import { createServiceSupabaseClient, isSupabaseServiceRoleConfigured } from "@/lib/supabase/service"
 
 type Ctx = { params: Promise<{ id: string }> }
 
@@ -53,22 +52,22 @@ export async function POST(request: Request, ctx: Ctx) {
   }
 
   const supabase = createServiceSupabaseClient()
-  const { data: post, error } = await supabase
-    .from("inquiry_board_posts")
+  const { data: row, error } = await supabase
+    .from("franchise_inquiries")
     .select("id, is_secret, password_hash")
     .eq("id", id)
     .maybeSingle()
 
-  if (error || !post) {
+  if (error || !row) {
     return NextResponse.json({ error: "글을 찾을 수 없습니다." }, { status: 404 })
   }
 
-  const row = post as Pick<InquiryBoardPostRow, "id" | "is_secret" | "password_hash">
-  if (!row.is_secret || !row.password_hash) {
+  const inv = row as { id: string; is_secret: boolean; password_hash: string | null }
+  if (!inv.is_secret || !inv.password_hash) {
     return NextResponse.json({ ok: true })
   }
 
-  if (!verifyPostPassword(parsed.data.password, row.password_hash)) {
+  if (!verifyPostPassword(parsed.data.password, inv.password_hash)) {
     return NextResponse.json({ error: "비밀번호가 일치하지 않습니다." }, { status: 401 })
   }
 

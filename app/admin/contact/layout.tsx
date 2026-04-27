@@ -49,12 +49,6 @@ export default async function AdminContactLayout({ children }: { children: React
           >
             가맹 문의
           </Link>
-          <Link
-            href="/admin/inquiry-board"
-            className="inline-flex h-8 items-center rounded-md border border-input bg-background px-3 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
-          >
-            문의게시판
-          </Link>
           <LogoutButton />
           <Link
             href="/"

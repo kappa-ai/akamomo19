@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
-import { inquirySubmitSchema } from "@/lib/franchise-inquiry"
+import { inquiryOnlineApplySchema } from "@/lib/franchise-inquiry"
+import { hashPostPassword } from "@/lib/inquiry-board-password"
 import { absoluteUrlFromRequest } from "@/lib/request-origin"
 import { createAnonSupabaseClient } from "@/lib/supabase/anon-server"
 
@@ -49,13 +50,20 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "JSON 본문이 필요합니다." }, { status: 400 })
   }
 
-  const parsed = inquirySubmitSchema.safeParse(json)
+  const parsed = inquiryOnlineApplySchema.safeParse(json)
   if (!parsed.success) {
-    const msg = parsed.error.flatten().fieldErrors.name?.[0] ?? parsed.error.flatten().fieldErrors.phone?.[0] ?? "입력값을 확인해 주세요."
+    const flat = parsed.error.flatten()
+    const msg =
+      flat.fieldErrors.password?.[0] ??
+      flat.fieldErrors.password_confirm?.[0] ??
+      flat.fieldErrors.name?.[0] ??
+      flat.fieldErrors.phone?.[0] ??
+      "입력값을 확인해 주세요."
     return NextResponse.json({ error: msg }, { status: 400 })
   }
 
-  const { name, phone, region, timing, message } = parsed.data
+  const { name, phone, region, timing, message, is_secret, password } = parsed.data
+  const password_hash = is_secret && password?.trim() ? hashPostPassword(password.trim()) : null
 
   try {
     const supabase = createAnonSupabaseClient()
@@ -65,6 +73,8 @@ export async function POST(request: Request) {
       p_region: region ?? "",
       p_timing: timing ?? "",
       p_message: message ?? "",
+      p_is_secret: is_secret,
+      p_password_hash: password_hash,
     })
 
     if (error) {

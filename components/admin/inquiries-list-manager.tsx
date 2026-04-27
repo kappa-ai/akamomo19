@@ -4,6 +4,7 @@ import Link from "next/link"
 import { useCallback, useEffect, useState } from "react"
 import { createBrowserClient } from "@supabase/ssr"
 import type { FranchiseInquiryRow } from "@/lib/franchise-inquiry"
+import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 
 function useSupabase() {
@@ -76,7 +77,14 @@ export function AdminInquiriesListManager() {
             className="flex flex-col gap-1 px-4 py-4 transition-colors hover:bg-muted/40 sm:flex-row sm:items-center sm:justify-between"
           >
             <div>
-              <p className="font-medium text-foreground">{r.name}</p>
+              <div className="flex flex-wrap items-center gap-2">
+                <p className="font-medium text-foreground">{r.name}</p>
+                {r.is_secret ? (
+                  <Badge variant="secondary" className="text-xs">
+                    비밀글
+                  </Badge>
+                ) : null}
+              </div>
               <p className="text-sm text-muted-foreground">{r.phone}</p>
               {(r.region || r.timing) && (
                 <p className="mt-1 text-xs text-muted-foreground">
