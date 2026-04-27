@@ -62,6 +62,11 @@ export function FooterClient({ contact, showStoresNav = true }: FooterClientProp
                   가맹문의
                 </Link>
               </li>
+              <li>
+                <Link href="/inquiry/board" className="text-muted-foreground transition-colors hover:text-primary">
+                  문의게시판
+                </Link>
+              </li>
               {showStoresNav ? (
                 <li>
                   <Link href="/stores" className="text-muted-foreground transition-colors hover:text-primary">
