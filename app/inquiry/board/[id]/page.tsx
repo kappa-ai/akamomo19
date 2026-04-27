@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+<<<<<<< HEAD
 import { notFound } from "next/navigation"
 import { BoardLoadError } from "@/components/inquiry/board-load-error"
 import type { FranchiseInquiryMessageRow, FranchiseInquiryRow } from "@/lib/franchise-inquiry"
@@ -13,10 +14,19 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const { id } = await params
   if (!uuidRe.test(id)) return { title: "문의 | 아카모모" }
   return { title: "문의 상세 | 아카모모" }
+=======
+import { getSiteContact } from "@/lib/get-site-contact"
+import { hasStoresForPublicNav } from "@/lib/stores-public"
+import { InquiryBoardDetailClient } from "./inquiry-board-detail-client"
+
+export const metadata: Metadata = {
+  title: "게시글 | 문의게시판",
+>>>>>>> 0f152ad88ad7e6ed275f2fbf23a2cc3fb0a67556
 }
 
 export default async function InquiryBoardDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
+<<<<<<< HEAD
   if (!uuidRe.test(id)) {
     notFound()
   }
@@ -79,4 +89,8 @@ export default async function InquiryBoardDetailPage({ params }: { params: Promi
       initialMessages={messages}
     />
   )
+=======
+  const [contact, showStoresNav] = await Promise.all([getSiteContact(), hasStoresForPublicNav()])
+  return <InquiryBoardDetailClient id={id} contact={contact} showStoresNav={showStoresNav} />
+>>>>>>> 0f152ad88ad7e6ed275f2fbf23a2cc3fb0a67556
 }

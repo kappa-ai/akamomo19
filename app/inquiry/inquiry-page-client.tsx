@@ -6,7 +6,11 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+<<<<<<< HEAD
 import { Phone, MessageCircle, Clock, ChevronDown, ChevronUp, HelpCircle } from "lucide-react"
+=======
+import { Phone, MessageCircle, Clock, ChevronDown, ChevronUp, HelpCircle, ClipboardList } from "lucide-react"
+>>>>>>> 0f152ad88ad7e6ed275f2fbf23a2cc3fb0a67556
 import Link from "next/link"
 import { useState } from "react"
 import { RevealSection } from "@/components/motion/reveal"
@@ -154,7 +158,7 @@ export function InquiryPageClient({
 
         <RevealSection className="py-12 bg-background">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid md:grid-cols-3 gap-4">
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
               <a
                 href={phoneHref}
                 className="bg-white rounded-3xl p-6 border border-border shadow-sm hover:shadow-md transition-all flex items-center gap-4 group"
@@ -180,6 +184,19 @@ export function InquiryPageClient({
                   <p className="text-lg font-bold text-foreground">아래에서 상담 신청하기</p>
                 </div>
               </a>
+
+              <Link
+                href="/inquiry/board"
+                className="bg-white rounded-3xl p-6 border border-border shadow-sm hover:shadow-md hover:border-primary/25 transition-all flex items-center gap-4 group"
+              >
+                <div className="w-14 h-14 bg-gradient-to-br from-primary/90 to-coral rounded-2xl flex items-center justify-center group-hover:scale-105 transition-transform">
+                  <ClipboardList className="w-7 h-7 text-white" />
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">문의게시판</p>
+                  <p className="text-lg font-bold text-foreground">글·댓글로 문의하기</p>
+                </div>
+              </Link>
 
               <div className="bg-white rounded-3xl p-6 border border-border shadow-sm flex items-center gap-4">
                 <div className="w-14 h-14 bg-peach-lighter rounded-2xl flex items-center justify-center">
