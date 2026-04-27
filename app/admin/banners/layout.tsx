@@ -44,17 +44,16 @@ export default async function AdminBannersLayout({ children }: { children: React
             페이지 정보
           </Link>
           <Link
-<<<<<<< HEAD
             href="/admin/inquiries"
             className="inline-flex h-8 items-center rounded-md border border-input bg-background px-3 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
           >
             가맹 문의
-=======
+          </Link>
+          <Link
             href="/admin/inquiry-board"
             className="inline-flex h-8 items-center rounded-md border border-input bg-background px-3 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground"
           >
             문의게시판
->>>>>>> 0f152ad88ad7e6ed275f2fbf23a2cc3fb0a67556
           </Link>
           <LogoutButton />
           <Link
