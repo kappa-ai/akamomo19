@@ -3,7 +3,6 @@
 import { HeaderClient } from "@/components/layout/header-client"
 import { FooterClient } from "@/components/layout/footer-client"
 import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
@@ -81,7 +80,6 @@ export function InquiryPageClient({
   const [region, setRegion] = useState("__empty__")
   const [timing, setTiming] = useState("__empty__")
   const [message, setMessage] = useState("")
-  const [isSecret, setIsSecret] = useState(false)
   const [password, setPassword] = useState("")
   const [passwordConfirm, setPasswordConfirm] = useState("")
   const [submitting, setSubmitting] = useState(false)
@@ -101,9 +99,9 @@ export function InquiryPageClient({
           region: region === "__empty__" ? undefined : region,
           timing: timing === "__empty__" ? undefined : timing,
           message,
-          is_secret: isSecret,
-          password: isSecret ? password : null,
-          password_confirm: isSecret ? passwordConfirm : null,
+          is_secret: true,
+          password,
+          password_confirm: passwordConfirm,
         }),
       })
       const j = (await res.json().catch(() => ({}))) as { error?: string; boardPath?: string }
@@ -214,8 +212,8 @@ export function InquiryPageClient({
               >
                 <h2 className="text-2xl font-bold text-foreground mb-2">온라인 상담 신청</h2>
                 <p className="text-muted-foreground mb-8">
-                  접수하신 내용은 문의게시판에 표시됩니다. 비밀글로 접수하면 이름·연락처·문의 내용은 비밀번호로만 확인할 수
-                  있습니다.
+                  접수하신 내용은 문의게시판에 표시되며, 모든 글은 비밀글로 저장됩니다. 이름·연락처·문의 내용은 비밀번호를
+                  입력한 경우에만 확인할 수 있습니다.
                 </p>
 
                 <form className="space-y-6" onSubmit={handleSubmit}>
@@ -291,47 +289,40 @@ export function InquiryPageClient({
                   </div>
 
                   <div className="space-y-4 rounded-xl border border-border bg-muted/20 p-4">
-                    <div className="flex items-start gap-2">
-                      <Checkbox
-                        id="apply-secret"
-                        checked={isSecret}
-                        onCheckedChange={(v) => setIsSecret(v === true)}
-                      />
-                      <div>
-                        <Label htmlFor="apply-secret" className="cursor-pointer text-sm font-medium leading-tight">
-                          비밀글로 접수
-                        </Label>
-                        <p className="mt-1 text-xs text-muted-foreground">
-                          문의게시판에서 이름·연락처·내용은 아래 비밀번호를 입력한 경우에만 보입니다.
-                        </p>
+                    <div>
+                      <Label className="text-sm font-medium leading-tight">비밀글 비밀번호</Label>
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        문의게시판에서 이름·연락처·내용은 아래 비밀번호를 입력한 경우에만 보입니다.
+                      </p>
+                    </div>
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <div className="space-y-2">
+                        <Label htmlFor="apply-pw">비밀번호 (4자 이상)</Label>
+                        <Input
+                          id="apply-pw"
+                          type="password"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          autoComplete="new-password"
+                          className="rounded-xl"
+                          required
+                          minLength={4}
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <Label htmlFor="apply-pw2">비밀번호 확인</Label>
+                        <Input
+                          id="apply-pw2"
+                          type="password"
+                          value={passwordConfirm}
+                          onChange={(e) => setPasswordConfirm(e.target.value)}
+                          autoComplete="new-password"
+                          className="rounded-xl"
+                          required
+                          minLength={4}
+                        />
                       </div>
                     </div>
-                    {isSecret ? (
-                      <div className="grid gap-4 sm:grid-cols-2">
-                        <div className="space-y-2">
-                          <Label htmlFor="apply-pw">비밀번호 (4자 이상)</Label>
-                          <Input
-                            id="apply-pw"
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            autoComplete="new-password"
-                            className="rounded-xl"
-                          />
-                        </div>
-                        <div className="space-y-2">
-                          <Label htmlFor="apply-pw2">비밀번호 확인</Label>
-                          <Input
-                            id="apply-pw2"
-                            type="password"
-                            value={passwordConfirm}
-                            onChange={(e) => setPasswordConfirm(e.target.value)}
-                            autoComplete="new-password"
-                            className="rounded-xl"
-                          />
-                        </div>
-                      </div>
-                    ) : null}
                   </div>
 
                   {formError ? <p className="text-sm text-destructive">{formError}</p> : null}

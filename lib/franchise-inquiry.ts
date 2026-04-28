@@ -11,12 +11,11 @@ export const inquirySubmitSchema = z.object({
 /** 온라인 상담 신청 API — 비밀글·비밀번호는 여기서만 설정 */
 export const inquiryOnlineApplySchema = inquirySubmitSchema
   .extend({
-    is_secret: z.boolean().optional().default(false),
+    is_secret: z.literal(true).optional().default(true),
     password: z.string().max(200).optional().nullable(),
     password_confirm: z.string().max(200).optional().nullable(),
   })
   .superRefine((data, ctx) => {
-    if (!data.is_secret) return
     const pw = data.password?.trim() ?? ""
     if (pw.length < 4) {
       ctx.addIssue({ code: "custom", message: "비밀글은 4자 이상 비밀번호가 필요합니다.", path: ["password"] })

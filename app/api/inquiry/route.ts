@@ -56,14 +56,15 @@ export async function POST(request: Request) {
     const msg =
       flat.fieldErrors.password?.[0] ??
       flat.fieldErrors.password_confirm?.[0] ??
+      flat.fieldErrors.is_secret?.[0] ??
       flat.fieldErrors.name?.[0] ??
       flat.fieldErrors.phone?.[0] ??
       "입력값을 확인해 주세요."
     return NextResponse.json({ error: msg }, { status: 400 })
   }
 
-  const { name, phone, region, timing, message, is_secret, password } = parsed.data
-  const password_hash = is_secret && password?.trim() ? hashPostPassword(password.trim()) : null
+  const { name, phone, region, timing, message, password } = parsed.data
+  const password_hash = password?.trim() ? hashPostPassword(password.trim()) : null
 
   try {
     const supabase = createAnonSupabaseClient()
@@ -73,7 +74,7 @@ export async function POST(request: Request) {
       p_region: region ?? "",
       p_timing: timing ?? "",
       p_message: message ?? "",
-      p_is_secret: is_secret,
+      p_is_secret: true,
       p_password_hash: password_hash,
     })
 

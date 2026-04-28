@@ -1,6 +1,7 @@
 "use client"
 
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { useCallback, useEffect, useState } from "react"
 import { createBrowserClient } from "@supabase/ssr"
 import type { FranchiseInquiryMessageRow, FranchiseInquiryRow } from "@/lib/franchise-inquiry"
@@ -24,12 +25,14 @@ function formatKo(dt: string) {
 }
 
 export function AdminInquiryDetailManager({ inquiryId }: { inquiryId: string }) {
+  const router = useRouter()
   const [inquiry, setInquiry] = useState<FranchiseInquiryRow | null>(null)
   const [messages, setMessages] = useState<FranchiseInquiryMessageRow[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [reply, setReply] = useState("")
   const [sending, setSending] = useState(false)
+  const [deleting, setDeleting] = useState(false)
 
   const load = useCallback(async () => {
     setError(null)
@@ -89,6 +92,26 @@ export function AdminInquiryDetailManager({ inquiryId }: { inquiryId: string }) 
     await load()
   }
 
+  async function deleteInquiry() {
+    if (deleting) return
+    const ok = window.confirm("이 문의를 삭제할까요? 댓글도 함께 삭제됩니다.")
+    if (!ok) return
+
+    setDeleting(true)
+    setError(null)
+    const supabase = useSupabase()
+    const { error: deleteError } = await supabase.from("franchise_inquiries").delete().eq("id", inquiryId)
+    setDeleting(false)
+
+    if (deleteError) {
+      setError(deleteError.message)
+      return
+    }
+
+    router.push("/admin/inquiries")
+    router.refresh()
+  }
+
   if (loading) {
     return <p className="text-sm text-muted-foreground">불러오는 중…</p>
   }
@@ -117,6 +140,9 @@ export function AdminInquiryDetailManager({ inquiryId }: { inquiryId: string }) 
       <div className="flex flex-wrap items-center justify-between gap-3">
         <Button type="button" variant="ghost" size="sm" asChild className="-ml-2">
           <Link href="/admin/inquiries">← 목록</Link>
+        </Button>
+        <Button type="button" variant="destructive" size="sm" onClick={deleteInquiry} disabled={deleting}>
+          {deleting ? "삭제 중…" : "문의 삭제"}
         </Button>
       </div>
 
