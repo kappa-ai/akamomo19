@@ -1,16 +1,15 @@
-import type { ReactNode } from "react"
-import { Check, Info } from "lucide-react"
+import { Info } from "lucide-react"
 import { RevealSection } from "@/components/motion/reveal"
 
 const costItems = [
   {
     item: "인테리어 및 간판",
-    cost: "1,700만원",
-    note: "15평 기준 (지역 및 면적에 따라 변동)\n브랜드 컨셉에 맞는 도면 제공\n매장 설계\n간판 및 집기 포함"
+    cost: "-",
+    note: "브랜드 색감 유지 제외\n자유롭게 구성 가능\n구성과 방향에 따라 가격 변동"
   },
   {
     item: "출입인증기/키오스크/CCTV",
-    cost: "400만원",
+    cost: "500만원",
     note: "무인 운영 시스템 구축 및 설치\n직접 구매 가능"
   },
   {
@@ -19,23 +18,18 @@ const costItems = [
     note: "판매 데이터 기반 최적 상품 구성"
   },
   {
-    item: "오픈 지원 컨설팅",
-    cost: "300만원",
-    note: "상권 분석\n매장 세팅\n운영 교육\n오픈 후 지속 운영 관리"
+    item: "오픈 지원 \n평생 지속 운영 관리",
+    cost: "400만원",
+    note: "상권 분석\n매장 세팅\n운영 교육\n영업 노하우 전수수"
   }
 ]
 
-const benefits: ReactNode[] = [
-  "에어컨 및 냉난방기 설치 별도",
-  <span key="royalty" className="font-bold text-red-600">
-    매월 로열티 면제
-  </span>,
-  <span key="mgmt" className="font-bold text-red-600">
-    매월 관리비 면제
-  </span>,
-  <span key="pr" className="font-bold text-red-600">
-    매월 홍보비 면제
-  </span>,
+const lifetimeSupportItems = [
+  "상시 운영 상담 지원 및 분기 1회 본사 직접 방문 관리",
+  "가격표·홍보물·포스터 제작 및 지원",
+  "홈페이지 배너, SNS, 유튜브 등 지속적인 브랜드 홍보 진행",
+  "월 1회 신상품 및 인기상품 판매 데이터 공유",
+  "로열티 면제",
 ]
 
 export function StartupCost() {
@@ -87,29 +81,35 @@ export function StartupCost() {
               <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                 <div className="text-lg font-semibold text-foreground">총 창업비용</div>
                 <div className="text-center">
-                  <span className="text-3xl md:text-4xl font-bold text-primary">3,900만원 </span>
+                  <span className="text-3xl md:text-4xl font-bold text-primary">2,400만원 </span>
                   <span className="text-sm text-muted-foreground ml-2">(VAT 포함)</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Benefits */}
+          {/* Lifetime support */}
           <div className="mt-8 bg-white rounded-3xl p-6 border border-border shadow-sm">
             <div className="flex items-center gap-2 mb-4">
-              <Info className="w-5 h-5 text-primary" />
-              <h3 className="font-semibold text-foreground">추가 안내사항</h3>
+              <Info className="w-5 h-5 text-primary shrink-0" aria-hidden />
+              <h3 className="font-semibold text-foreground">오픈 후에도 평생 지원 관리</h3>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              {benefits.map((benefit, index) => (
-                <div key={index} className="flex items-center gap-3 text-sm">
-                  <div className="w-6 h-6 bg-peach-lighter rounded-full flex items-center justify-center shrink-0">
-                    <Check className="w-4 h-4 text-primary" />
-                  </div>
-                  <span className={index === 0 ? "text-muted-foreground" : "text-red-600"}>{benefit}</span>
-                </div>
-              ))}
-            </div>
+            <ol className="list-none space-y-3 m-0 p-0 text-sm">
+              {lifetimeSupportItems.map((line, index) => {
+                const isLast = index === lifetimeSupportItems.length - 1
+                return (
+                  <li
+                    key={index}
+                    className={`flex gap-3 items-start ${isLast ? "text-red-600 font-semibold" : "text-foreground"}`}
+                  >
+                    <span className={`tabular-nums shrink-0 ${isLast ? "" : "text-muted-foreground"}`}>
+                      {index + 1}.
+                    </span>
+                    <span>{line}</span>
+                  </li>
+                )
+              })}
+            </ol>
           </div>
         </div>
       </div>
