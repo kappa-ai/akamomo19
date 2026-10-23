@@ -4,32 +4,26 @@ import { RevealSection } from "@/components/motion/reveal"
 const costItems = [
   {
     item: "인테리어 및 간판",
-    cost: "-",
-    note: "브랜드 색감 및 컨셉 유지 필수\n그 외 자유로운 인테리어 구성 가능\n시공 업체 및 구성에 따라 비용 변동"
+    cost: "1,300만원",
+    note: "브랜드 색감 및 콘셉트 유지 필수\n그 외 인테리어 구성 및 시공 업체 자유 선택\n시공 업체와 구성에 따라 비용 변동"
   },
   {
-    item: "출입인증기/키오스크/CCTV",
+    item: "필수집기",
+    detail: "(출입인증기/키오스크/CCTV)",
     cost: "500만원",
-    note: "무인 운영 시스템 구축 및 설치\n직접 구매 가능"
+    note: "성인 출입 인증 및 무인 결제·보안 시스템 구축\n점주 직접 구매 가능"
   },
   {
     item: "초도물량",
-    cost: "1,500만원",
-    note: "판매 데이터 기반 최적 상품 구성"
+    cost: "1,300만원",
+    note: "실제 매장 판매 데이터를 바탕으로\n인기 상품 중심의 초도물량 구성"
   },
   {
-    item: "오픈 지원 \n평생 지속 운영 관리",
+    item: "가맹비",
+    detail: "(오픈 지원 및 지속 운영 관리)",
     cost: "400만원",
-    note: "상권 분석\n매장 세팅\n운영 교육\n영업 노하우 전수"
+    note: "상권 분석 및 매장 세팅\n운영 교육 및 영업 노하우 전수"
   }
-]
-
-const lifetimeSupportItems = [
-  "상시 운영 상담 지원 및 분기 1회 본사 직접 방문 관리",
-  "가격표·홍보물·포스터 제작 및 지원",
-  "홈페이지 배너, SNS, 유튜브 등 지속적인 브랜드 홍보 진행",
-  "인기 판매상품 및 신상품 실시간 업데이트",
-  "매월 로열티 면제",
 ]
 
 export function StartupCost() {
@@ -61,8 +55,11 @@ export function StartupCost() {
             <div className="divide-y divide-border">
               {costItems.map((item, index) => (
                 <div key={index} className="p-4 md:p-6 hover:bg-peach-lighter/20 transition-colors">
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-start">
-                    <div className="font-medium text-foreground">{item.item}</div>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
+                    <div>
+                      <div className="font-bold text-foreground md:text-lg">{item.item}</div>
+                      {item.detail && <div className="text-sm text-foreground">{item.detail}</div>}
+                    </div>
                     <div className="text-center">
                       <span className="inline-block bg-peach-lighter rounded-full px-4 py-1 font-bold text-primary">
                         {item.cost}
@@ -81,35 +78,33 @@ export function StartupCost() {
               <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                 <div className="text-lg font-semibold text-foreground">총 창업비용</div>
                 <div className="text-center">
-                  <span className="text-3xl md:text-4xl font-bold text-primary">2,400만원 </span>
-                  <span className="text-sm text-muted-foreground ml-2">(VAT 포함)</span>
+                  <span className="text-3xl md:text-4xl font-bold text-primary">3,500만원</span>
+                  <span className="text-sm text-muted-foreground ml-2">(VAT 미포함)</span>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Lifetime support */}
+          <p className="mt-8 text-center text-2xl md:text-4xl font-bold text-red-600">매월 로열티/교육비 면제</p>
+
+          {/* Interior detail */}
           <div className="mt-8 bg-white rounded-3xl p-6 border border-border shadow-sm">
             <div className="flex items-center gap-2 mb-4">
               <Info className="w-5 h-5 text-primary shrink-0" aria-hidden />
-              <h3 className="font-semibold text-foreground">오픈 후에도 평생 지원 관리</h3>
+              <h3 className="font-semibold text-foreground">인테리어 상세 안내</h3>
             </div>
-            <ol className="list-none space-y-3 m-0 p-0 text-sm">
-              {lifetimeSupportItems.map((line, index) => {
-                const isLast = index === lifetimeSupportItems.length - 1
-                return (
-                  <li
-                    key={index}
-                    className={`flex gap-3 items-start ${isLast ? "text-red-600 font-semibold" : "text-foreground"}`}
-                  >
-                    <span className={`tabular-nums shrink-0 ${isLast ? "" : "text-muted-foreground"}`}>
-                      {index + 1}.
-                    </span>
-                    <span>{line}</span>
-                  </li>
-                )
-              })}
-            </ol>
+            <div className="space-y-4 text-sm leading-relaxed text-foreground break-keep">
+              <p>
+                위 표의 인테리어 비용은 예상 견적이며, 상가의 기존 시설, 내부 상태 및 시공 범위에 따라 달라집니다.
+                {" "}<br className="hidden md:block" />
+                지정 시공업체 없이 점주가 직접 업체를 선정하고 견적을 비교할 수 있습니다.
+              </p>
+              <p>
+                브랜드 지정 색감과 기본 콘셉트를 유지하는 범위에서 공간 구성과 세부 인테리어는 자유롭게 선택할 수 있습니다.
+                {" "}<br className="hidden md:block" />
+                기본 구성부터 추가 연출까지 예산과 매장 여건에 맞춰 진행하며, 본사는 브랜드에 어울리는 인테리어 방향을 안내합니다.
+              </p>
+            </div>
           </div>
         </div>
       </div>

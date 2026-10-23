@@ -1,10 +1,9 @@
 import { Header } from "@/components/layout/header"
 import { Footer } from "@/components/layout/footer"
-import { BrandSummary } from "@/components/home/brand-summary"
-import { Differentiation } from "@/components/home/differentiation"
-import { TargetAudience } from "@/components/home/target-audience"
-import { SideJobOperation } from "@/components/brand/side-job-operation"
-import { HeadquartersSupport } from "@/components/brand/headquarters-support"
+import { BrandLifestyle } from "@/components/brand/brand-lifestyle"
+import { BrandStartupCost } from "@/components/brand/brand-startup-cost"
+import { BrandWeeklyRoutine } from "@/components/brand/brand-weekly-routine"
+import { BrandProfit } from "@/components/brand/brand-profit"
 import { Heart } from "lucide-react"
 import { RevealSection } from "@/components/motion/reveal"
 import { getSiteContact } from "@/lib/get-site-contact"
@@ -40,12 +39,10 @@ export default async function BrandPage() {
           </div>
         </RevealSection>
 
-        <BrandSummary />
-
-        <Differentiation />
-        <SideJobOperation />
-        <TargetAudience />
-        <HeadquartersSupport />
+        <BrandLifestyle />
+        <BrandStartupCost />
+        <BrandWeeklyRoutine />
+        <BrandProfit />
       </main>
       <Footer contact={contact} />
     </div>
