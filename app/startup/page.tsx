@@ -29,7 +29,7 @@ export default async function StartupPage() {
             <div className="text-center max-w-3xl mx-auto">
               <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-peach-light bg-white px-4 py-2">
                 <Rocket className="w-4 h-4 text-primary" />
-                <span className="text-sm font-medium text-foreground">가맹 안내</span>
+                <span className="text-sm font-medium text-foreground">가맹 비용</span>
               </div>
 
               <h1 className="text-3xl md:text-5xl font-bold text-foreground mb-6">

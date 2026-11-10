@@ -22,7 +22,7 @@ export type PageTitles = {
 export const PAGE_TITLE_DEFAULTS: PageTitles = {
   page_title_home: "아카모모 파트너스 | 초기비용 부담 없는 무인 성인용품 창업",
   page_title_stores: "매장 찾기 | 아카모모 파트너스",
-  page_title_startup: "창업 안내 | 아카모모 파트너스",
+  page_title_startup: "가맹 비용 | 아카모모 파트너스",
   page_title_inquiry: "문의하기 | 아카모모 파트너스",
 }
 

@@ -29,7 +29,7 @@ export function BrandStartupCost() {
             href="/startup"
             className="text-[#6db3a3] underline-offset-4 transition-colors hover:text-[#4f9a89] hover:underline"
           >
-            [가맹안내]
+            [가맹비용]
           </Link>{" "}
           메뉴에서 확인하세요.
         </p>

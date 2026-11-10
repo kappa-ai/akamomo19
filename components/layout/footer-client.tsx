@@ -54,7 +54,7 @@ export function FooterClient({ contact, showStoresNav = true }: FooterClientProp
               </li>
               <li>
                 <Link href="/startup" className="text-muted-foreground transition-colors hover:text-primary">
-                  가맹안내
+                  가맹비용
                 </Link>
               </li>
               <li>

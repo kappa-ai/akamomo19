@@ -128,7 +128,7 @@ export function AdminSiteContactManager() {
             />
           </div>
           <div className="space-y-2">
-            <Label htmlFor="page_title_startup">창업 안내 페이지</Label>
+            <Label htmlFor="page_title_startup">가맹 비용 페이지</Label>
             <Input
               id="page_title_startup"
               value={row.page_title_startup ?? ""}

@@ -12,7 +12,7 @@ function buildNavigation(showStoresNav: boolean) {
   return [
     { name: "HOME", href: "/" },
     { name: "브랜드소개", href: "/brand" },
-    { name: "가맹안내", href: "/startup" },
+    { name: "가맹비용", href: "/startup" },
     { name: "가맹문의", href: "/inquiry" },
     { name: "문의게시판", href: "/inquiry/board" },
     ...(showStoresNav ? [{ name: "매장안내", href: "/stores" as const }] : []),

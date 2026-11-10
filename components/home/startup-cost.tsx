@@ -9,20 +9,23 @@ const costItems = [
   },
   {
     item: "필수집기",
-    detail: "(출입인증기/키오스크/CCTV)",
     cost: "500만원",
-    note: "성인 출입 인증 및 무인 결제·보안 시스템 구축\n점주 직접 구매 가능"
+    note: "출입인증기 1대\n키오스크 1대\nCCTV 4대"
   },
   {
     item: "초도물량",
     cost: "1,300만원",
-    note: "실제 매장 판매 데이터를 바탕으로\n인기 상품 중심의 초도물량 구성"
+    note: "판매데이터 기반의\n약 400가지 인기상품\n초도물량 구성"
   },
   {
     item: "가맹비",
-    detail: "(오픈 지원 및 지속 운영 관리)",
     cost: "400만원",
     note: "상권 분석 및 매장 세팅\n운영 교육 및 영업 노하우 전수"
+  },
+  {
+    item: "교육비",
+    cost: "0원",
+    note: "10호점 한정\n2,000,000원\n교육비 면제"
   }
 ]
 
@@ -56,10 +59,7 @@ export function StartupCost() {
               {costItems.map((item, index) => (
                 <div key={index} className="p-4 md:p-6 hover:bg-peach-lighter/20 transition-colors">
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-center">
-                    <div>
-                      <div className="font-bold text-foreground md:text-lg">{item.item}</div>
-                      {item.detail && <div className="text-sm text-foreground">{item.detail}</div>}
-                    </div>
+                    <div className="font-bold text-foreground md:text-lg">{item.item}</div>
                     <div className="text-center">
                       <span className="inline-block bg-peach-lighter rounded-full px-4 py-1 font-bold text-primary">
                         {item.cost}
@@ -85,7 +85,7 @@ export function StartupCost() {
             </div>
           </div>
 
-          <p className="mt-8 text-center text-2xl md:text-4xl font-bold text-red-600">매월 로열티/교육비 면제</p>
+          <p className="mt-8 text-center text-2xl md:text-4xl font-bold text-red-600">10호점 한정 매월 로열티 면제</p>
 
           {/* Interior detail */}
           <div className="mt-8 bg-white rounded-3xl p-6 border border-border shadow-sm">
